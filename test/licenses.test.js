@@ -109,3 +109,43 @@ test('troca de senha do admin exige a senha atual', async () => {
   await assert.rejects(svc.route('POST', '/admin/login', { password: 'senha-do-admin' }), { status: 401 });
   assert.ok((await svc.route('POST', '/admin/login', { password: 'nova-senha-1' })).token);
 });
+
+test('teste grátis entra na hora por 3 dias e não aceita cadastro repetido', async () => {
+  const svc = make();
+  const r = await svc.createOrder({ name: 'Salão Bela', phone: '(79) 99777-1234', email: 'bela@x.com', plan: 'Teste', password: 'senha123', segment: 'saloes' });
+  assert.equal(r.trial, true);
+  const lg = await svc.login({ login: 'bela@x.com', password: 'senha123' });
+  assert.equal(lg.ok, true);
+  const dias = (lg.expiresAt - Date.now()) / 864e5;
+  assert.ok(dias > 2.9 && dias <= 3);
+  await assert.rejects(svc.createOrder({ name: 'Outro', phone: '79997771234', email: 'novo@x.com', plan: 'Teste', password: 'senha123' }), { status: 409 });
+  await assert.rejects(svc.createOrder({ name: 'Outro', phone: '79911112222', email: 'BELA@x.com', plan: 'Mensal', password: 'senha123' }), { status: 409 });
+});
+
+test('pedido exige e-mail e WhatsApp válidos e ignora robôs', async () => {
+  const svc = make();
+  await assert.rejects(svc.createOrder({ name: 'A', phone: '123', email: 'a@x.com', plan: 'Teste', password: 'senha123' }), { status: 400 });
+  await assert.rejects(svc.createOrder({ name: 'A', phone: '79911112222', email: 'sem-arroba', plan: 'Teste', password: 'senha123' }), { status: 400 });
+  await assert.rejects(svc.createOrder({ name: 'A', phone: '79911112222', email: 'a@x.com', plan: 'Vitalício', password: 'senha123' }), { status: 400 });
+  await svc.createOrder({ name: 'Robô', phone: '79911112222', email: 'r@x.com', plan: 'Teste', password: 'senha123', website: 'http://spam' });
+  const t = await loggedIn(svc);
+  assert.equal((await svc.route('GET', '/admin/licenses', {}, t)).items.length, 0);
+});
+
+test('painel trava depois de muitas senhas erradas do mesmo IP', async () => {
+  const svc = make();
+  for (let i = 0; i < 8; i++) await assert.rejects(svc.route('POST', '/admin/login', { password: 'x' }, '', '1.1.1.1'), { status: 401 });
+  await assert.rejects(svc.route('POST', '/admin/login', { password: 'senha-do-admin' }, '', '1.1.1.1'), { status: 429 });
+  assert.ok((await svc.route('POST', '/admin/login', { password: 'senha-do-admin' }, '', '2.2.2.2')).token);
+});
+
+test('plano semestral aprovado vale 180 dias', async () => {
+  const svc = make();
+  const t = await loggedIn(svc);
+  await svc.createOrder({ name: 'Corretora', phone: '79955554444', email: 'co@x.com', plan: 'Semestral', password: 'senha123' });
+  const key = (await svc.route('GET', '/admin/licenses', {}, t)).items[0].key;
+  const ap = await svc.route('POST', `/admin/license/${key}/approve`, {}, t);
+  const dias = (ap.license.expiresAt - Date.now()) / 864e5;
+  assert.ok(dias > 179.9 && dias <= 180);
+  assert.equal(ap.license.order.amount, 200);
+});

@@ -1,0 +1,3 @@
+[build]
+  command = "echo 'sem build'"
+  publish = "."

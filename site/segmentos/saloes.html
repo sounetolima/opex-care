@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opex Care para salões e barbearias — cliente voltando todo mês</title>
+<meta name="description" content="Lembrete do horário no WhatsApp, aviso de retorno e aniversariantes para salão de beleza e barbearia. Teste grátis por 3 dias.">
+<meta property="og:title" content="Opex Care para salões e barbearias — cliente voltando todo mês">
+<meta property="og:description" content="Lembrete do horário no WhatsApp, aviso de retorno e aniversariantes para salão de beleza e barbearia. Teste grátis por 3 dias.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://opex-care-site.netlify.app/img/logo.png">
+<link rel="icon" href="../img/favicon.png">
+<style>
+:root{--navy:#060C1A;--navy2:#0B1630;--blue:#3D63DD;--gold:#D4AA46;--ink:#0F172A;--muted:#5B6B82;--line:#E2E8F0;--bg:#F5F8FF;--ok:#15803D;--bad:#B91C1C}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:#fff}
+a{color:inherit}img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{background:rgba(6,12,26,.96);color:#F8FAFC;position:sticky;top:0;z-index:20}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
+.brand img{width:34px;height:34px;border-radius:9px}.brand span{color:var(--gold)}
+nav{display:flex;align-items:center}nav a{margin-left:20px;text-decoration:none;font-size:14px;opacity:.85}nav a:hover{opacity:1}
+.btn{display:inline-block;padding:14px 22px;border-radius:12px;font-weight:700;text-decoration:none;font-size:15px;border:0;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s;text-align:center}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--blue);color:#fff}.btn.gold{background:var(--gold);color:var(--navy);box-shadow:0 10px 26px rgba(212,170,70,.3)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink);background:#fff}.btn.light{border:1px solid rgba(255,255,255,.28);color:#F8FAFC}
+.btn.sm{padding:9px 16px;font-size:14px}.btn.block{display:block;width:100%}
+.hero{background:radial-gradient(700px 360px at 85% 10%,rgba(61,99,221,.45),transparent 70%),linear-gradient(160deg,#04070E,#060C1A 55%,#0B1630);color:#F8FAFC;padding:64px 0 76px;overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:700}
+.hero h1{font-size:44px;line-height:1.12;margin:14px 0 16px;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p.lead{font-size:18px;opacity:.9;margin:0 0 26px;max-width:560px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;opacity:.85;margin-top:20px;padding:0;list-style:none}
+.trust li:before{content:"✓ ";color:var(--gold);font-weight:800}
+.phone{background:#0B1630;border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:16px;box-shadow:0 30px 60px rgba(0,0,0,.45);max-width:350px;margin-left:auto}
+.chat{background:#0E1A33;border-radius:18px;padding:16px}
+.chat .head{display:flex;align-items:center;gap:10px;font-size:14px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:10px;margin-bottom:14px}
+.chat .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#F2C96B);display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:800;flex:none}
+.bubble{background:#1E2F55;border-radius:14px 14px 14px 4px;padding:11px 13px;font-size:14px;max-width:92%;margin-bottom:10px}
+.bubble.me{background:#2B4DB8;margin-left:auto;border-radius:14px 14px 4px 14px;width:fit-content}
+.bubble small{display:block;opacity:.6;font-size:11px;margin-top:4px}
+.tag{display:inline-block;background:rgba(212,170,70,.15);color:var(--gold);border-radius:999px;padding:2px 10px;font-size:12px;margin-bottom:6px}
+section{padding:68px 0;scroll-margin-top:64px}#comecar{scroll-margin-top:84px}body:has(#pedido:focus-within) .mbar{display:none}section.alt{background:var(--bg)}
+.kicker{color:var(--blue);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:700}
+h2{font-size:32px;line-height:1.2;margin:8px 0 12px;letter-spacing:-.01em}
+.sub{color:var(--muted);max-width:700px;margin:0 0 36px;font-size:17px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{margin:0 0 8px;font-size:18px}.card p{margin:0;color:var(--muted);font-size:15px}
+a.card{text-decoration:none;display:block;transition:box-shadow .2s,transform .2s}a.card:hover{box-shadow:0 14px 34px rgba(15,23,42,.08);transform:translateY(-3px)}
+a.card .go{color:var(--blue);font-weight:700;font-size:14px;margin-top:12px;display:block}
+.ico{font-size:24px;width:50px;height:50px;border-radius:14px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ba .col{border-radius:18px;padding:26px;border:1px solid var(--line);background:#fff}
+.ba .col.after{background:var(--navy);color:#F8FAFC;border-color:var(--navy)}
+.ba h3{margin:0 0 14px;font-size:18px}.ba ul{margin:0;padding:0;list-style:none}
+.ba li{padding:9px 0 9px 30px;position:relative;font-size:15.5px;border-top:1px solid var(--line)}
+.ba li:first-child{border-top:0}.ba .after li{border-color:rgba(255,255,255,.1)}
+.ba .before li:before{content:"✕";position:absolute;left:4px;color:var(--bad);font-weight:800}
+.ba .after li:before{content:"✓";position:absolute;left:4px;color:var(--gold);font-weight:800}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.duo .card h3{display:flex;align-items:center;gap:10px}
+.duo ul{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:15.5px}.duo li{padding:4px 0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+.step{background:#fff;padding:24px 20px}.step+.step{border-left:1px solid var(--line)}
+.step .n{font-size:13px;font-weight:800;color:var(--gold);background:var(--navy);border-radius:999px;padding:4px 10px;display:inline-block}
+.step h4{margin:12px 0 6px;font-size:17px}.step p{margin:0;color:var(--muted);font-size:14.5px}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+.plan{border:1px solid var(--line);border-radius:20px;padding:24px 20px;background:#fff;display:flex;flex-direction:column;position:relative}
+.plan.hl{border:2px solid var(--blue);box-shadow:0 18px 40px rgba(61,99,221,.18)}
+.plan .badge{position:absolute;top:-12px;left:20px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:800;border-radius:999px;padding:4px 12px}
+.plan .name{font-weight:800;font-size:17px}.plan .price{font-size:34px;font-weight:800;margin:8px 0 0}
+.plan .price small{font-size:14px;font-weight:500;color:var(--muted)}.plan .per{font-size:13.5px;color:var(--ok);font-weight:600;min-height:22px}
+.plan ul{margin:14px 0 20px;padding:0;list-style:none;color:var(--muted);font-size:14.5px;flex:1}
+.plan li{padding:5px 0}.plan li:before{content:"✓ ";color:var(--ok);font-weight:800}
+.order{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start;margin-top:40px}
+.order .pitch{background:var(--navy);color:#F8FAFC;border-radius:20px;padding:28px}
+.order .pitch h3{margin:0 0 10px;font-size:22px}.order .pitch ol{margin:14px 0 0;padding-left:20px;opacity:.92}.order .pitch li{padding:5px 0}
+form.box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 18px 40px rgba(15,23,42,.06)}
+form.box h3{margin:0 0 4px;font-size:20px}
+label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 5px}
+input.in,select.in{width:100%;padding:13px 14px;border-radius:11px;border:1px solid #CBD5E1;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+input.in:focus,select.in:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.fmsg{font-size:14px;margin-top:12px;min-height:20px}.fmsg.err{color:var(--bad)}
+.small{font-size:13px;color:var(--muted)}
+.done{display:none}.done h3{color:var(--ok)}.done ol{padding-left:20px}.done li{padding:6px 0}
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}.faq summary{cursor:pointer;font-weight:700}.faq p{color:var(--muted);margin:10px 0 0}
+.cta{background:radial-gradient(600px 280px at 50% 0%,rgba(212,170,70,.18),transparent 70%),linear-gradient(160deg,#04070E,#0B1630);color:#F8FAFC;text-align:center;padding:72px 0}
+.cta p{opacity:.88;max-width:620px;margin:12px auto 26px}
+footer{background:#04070E;color:#94A3B8;padding:28px 0 90px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}footer a{margin-left:14px}
+.mbar{display:none}
+.doc{max-width:780px}.doc h1{font-size:32px;line-height:1.2}.doc h2{font-size:21px;margin-top:30px}.doc li{padding:4px 0}
+.warn{background:#FFF7E6;border:1px solid #F3D38A;border-radius:12px;padding:14px 16px;font-size:15px}
+.shot{background:#0B1630;color:#E2E8F0;border-radius:12px;padding:12px 14px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto}
+@media (max-width:900px){
+ .hero{padding:44px 0 56px}.hero .grid{grid-template-columns:1fr;gap:34px}.phone{margin:0 auto}
+ .hero h1{font-size:32px}h2{font-size:26px}section{padding:52px 0}
+ .grid3,.grid2,.plans,.ba,.duo,.order,.two{grid-template-columns:1fr}.steps{grid-template-columns:1fr}
+ .step+.step{border-left:none;border-top:1px solid var(--line)}
+ nav a.lk{display:none}
+ .mbar{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(6,12,26,.97);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+ .mbar .btn{flex:1;padding:13px 10px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,a.card{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/logo.png" alt="" width="34" height="34"><span>OPEX</span>&nbsp;CARE</a>
+  <nav><a class="lk" href="../index.html#diferencial">Por que funciona</a><a class="lk" href="../index.html#recursos">Recursos</a><a class="lk" href="../index.html#planos">Planos</a><a class="lk" href="../index.html#faq">Dúvidas</a>
+  <a class="btn gold sm" href="#comecar">Testar grátis</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap grid">
+  <div>
+    <div class="eyebrow">Para salões de beleza e barbearias</div>
+    <h1>Cadeira ocupada e cliente <em>voltando todo mês</em>.</h1>
+    <p class="lead">O Opex Care avisa o cliente do horário, com o serviço e o profissional. Trinta dias depois, ele lembra que está na hora de voltar. Você cuida do atendimento e o WhatsApp cuida da agenda.</p>
+    <div class="ctas">
+      <a class="btn gold" href="#comecar" data-plan="Teste">Começar teste grátis de 3 dias</a>
+      <a class="btn light" href="#diferencial">Ver como funciona</a>
+    </div>
+    <ul class="trust"><li>Sem cartão</li><li>Instala em 2 minutos</li><li>Funciona no WhatsApp que você já usa</li></ul>
+  </div>
+  <div class="phone" aria-hidden="true"><div class="chat">
+    <div class="head"><div class="av">B</div><div><b>Barbearia Dom</b><br><small style="opacity:.6">mensagens automáticas</small></div></div>
+    <div class="bubble"><span class="tag">📅 Lembrete</span><br>Boa tarde, Rafael! Amanhã às 18:30 você tem horário: corte e barba com o Léo na Barbearia Dom. Te esperamos! ✂️<small>17:10 ✓✓</small></div><div class="bubble me">Fechado! 💈<small>17:12</small></div><div class="bubble"><span class="tag">🔁 Retorno</span><br>Rafael, já faz um mês do seu último corte. Quer que eu separe um horário para você esta semana?<small>30 dias depois ✓✓</small></div>
+  </div></div>
+</div></section>
+
+<section id="diferencial"><div class="wrap">
+  <div class="kicker">O que muda</div>
+  <h2>O mesmo dia de trabalho, sem a parte que ninguém tem tempo de fazer</h2>
+  <p class="sub">Relacionamento com cliente não falha por falta de vontade. Falha porque depende de alguém lembrar. O Opex Care tira isso da memória da equipe.</p>
+  <div class="ba">
+    <div class="col before"><h3>Hoje</h3><ul><li>Cliente esquece o horário e a cadeira fica parada</li><li>Você descobre o cancelamento em cima da hora</li><li>Quem veio uma vez não é chamado de volta</li><li>Aniversário do cliente passa em branco</li></ul></div>
+    <div class="col after"><h3>Com o Opex Care</h3><ul><li>Lembrete com serviço, profissional e hora, sem você digitar</li><li>Etapa "Lista de espera" para encaixar quem quer horário</li><li>Aviso de retorno programado para 30 dias depois</li><li>Aniversariantes do mês em dois toques, com 4 variações de mensagem</li></ul></div>
+  </div>
+  <div class="duo">
+    <div class="card"><h3><span>🧑‍💼</span> O seu dia melhora</h3><ul>
+      <li>Menos horário vazio: o cliente é avisado antes, sem ninguém parar para isso.</li>
+      <li>Sua equipe atende em vez de digitar a mesma mensagem dezenas de vezes.</li>
+      <li>Você abre o painel e vê o que saiu, o que está programado e quem está sem retorno.</li>
+      <li>Se um funcionário sai, o histórico dos clientes fica.</li>
+    </ul></div>
+    <div class="card"><h3><span>🙂</span> A experiência do seu cliente melhora</h3><ul>
+      <li>Recebe a confirmação na hora em que marca.</li>
+      <li>É lembrado com o serviço, o horário e o nome de quem vai atender.</li>
+      <li>Alguém pergunta como foi depois. Quase ninguém faz isso.</li>
+      <li>É chamado pelo nome e lembrado no aniversário.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="kicker">Nosso diferencial</div>
+  <h2>Por que o Opex Care e não mais um sistema</h2>
+  <p class="sub">Ferramentas grandes pedem migração, treinamento e mensalidade por usuário. O Opex Care foi feito para quem quer resultado no mesmo dia.</p>
+  <div class="grid3">
+    <div class="card"><div class="ico">💬</div><h3>Vive dentro do WhatsApp Web</h3><p>Não troca seu número, não exige API paga e não tem outro sistema para abrir. O painel aparece ao lado das suas conversas.</p></div>
+    <div class="card"><div class="ico">🔒</div><h3>Seus dados ficam com você</h3><p>Clientes e histórico ficam no seu navegador, com backup na sua conta do Google Drive. Nossa parte guarda só a sua licença.</p></div>
+    <div class="card"><div class="ico">🛡️</div><h3>Envio com ritmo seguro</h3><p>Intervalos aleatórios, pausas, limite diário e variações de texto. Pensado para proteger o seu número.</p></div>
+    <div class="card"><div class="ico">🎯</div><h3>Pronto para o seu ramo</h3><p>Escolha o segmento e o funil, as etiquetas e os textos já vêm ajustados. Você muda o que quiser depois.</p></div>
+    <div class="card"><div class="ico">🏷️</div><h3>Com a sua marca</h3><p>O painel abre com o nome e o logo da sua empresa. Sua equipe trabalha na ferramenta da casa.</p></div>
+    <div class="card"><div class="ico">💰</div><h3>Preço fixo e baixo</h3><p>A partir de R$ 25 por mês no plano anual. Sem taxa por mensagem e sem cobrança por contato.</p></div>
+  </div>
+</div></section>
+
+<section id="funciona"><div class="wrap">
+  <div class="kicker">Como funciona</div>
+  <h2>Você marca uma vez. O resto acontece sozinho.</h2>
+  <p class="sub">Quatro momentos em que o seu cliente é lembrado de que você existe.</p>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><h4>Marcar</h4><p>Marque pelo painel ou direto na Google Agenda. O serviço e o profissional vão junto.</p></div>
+    <div class="step"><span class="n">02</span><h4>Confirmar</h4><p>O cliente recebe a confirmação no WhatsApp com data, hora e serviço.</p></div>
+    <div class="step"><span class="n">03</span><h4>Lembrar</h4><p>Lembrete 1 dia antes. Para a tarde e a noite, outro 6 horas antes.</p></div>
+    <div class="step"><span class="n">04</span><h4>Acompanhar</h4><p>Depois do atendimento, o ciclo de retorno começa: 2 horas, 7 dias, 15 dias ou o que você definir.</p></div>
+  </div>
+</div></section>
+
+<section id="recursos" class="alt"><div class="wrap">
+  <div class="kicker">Recursos</div>
+  <h2>O que mais ajuda no seu ramo</h2>
+  <p class="sub">E todos os outros recursos do Opex Care continuam disponíveis.</p>
+  <div class="grid3"><div class="card"><div class="ico">✂️</div><h3>Serviços com duração e valor</h3><p>Cadastre corte, barba, coloração. Ao marcar, o serviço entra na agenda e no lembrete.</p></div><div class="card"><div class="ico">🔁</div><h3>Cliente sumido volta</h3><p>O funil mostra quem é fiel e quem sumiu. O ciclo de retorno chama de volta no tempo certo.</p></div><div class="card"><div class="ico">🎂</div><h3>Aniversariantes</h3><p>Filtre por hoje, 7 dias, 30 dias ou período e mande os parabéns com ritmo seguro.</p></div></div>
+  <p style="margin-top:22px"><a href="../index.html#recursos" style="color:var(--blue);font-weight:700">Ver todos os recursos →</a></p>
+</div></section>
+
+
+
+<section id="planos" ><div class="wrap">
+  <div class="kicker">Planos</div>
+  <h2>Teste 3 dias. Se um cliente voltar, já se pagou.</h2>
+  <p class="sub">Todos os planos têm todos os recursos. Muda só o prazo e o preço.</p>
+  <div class="plans">
+    <div class="plan"><div class="name">Teste grátis</div><div class="price">R$ 0 <small>/ 3 dias</small></div><div class="per">Sem cartão</div>
+      <ul><li>Todos os recursos</li><li>Liberação na hora</li><li>Sem compromisso</li></ul><a class="btn ghost" href="#comecar" data-plan="Teste">Começar o teste</a></div>
+    <div class="plan"><div class="name">Mensal</div><div class="price">R$ 40 <small>/ mês</small></div><div class="per">&nbsp;</div>
+      <ul><li>Todos os recursos</li><li>Suporte pelo WhatsApp</li><li>Sem fidelidade</li></ul><a class="btn ghost" href="#comecar" data-plan="Mensal">Quero o mensal</a></div>
+    <div class="plan"><div class="name">Semestral</div><div class="price">R$ 200 <small>/ 6 meses</small></div><div class="per">Sai a R$ 33,33 por mês · economize R$ 40</div>
+      <ul><li>Todos os recursos</li><li>Suporte pelo WhatsApp</li><li>Preço garantido por 6 meses</li></ul><a class="btn ghost" href="#comecar" data-plan="Semestral">Quero o semestral</a></div>
+    <div class="plan hl"><span class="badge">MELHOR PREÇO</span><div class="name">Anual</div><div class="price">R$ 300 <small>/ ano</small></div><div class="per">Sai a R$ 25 por mês · economize R$ 180</div>
+      <ul><li>Todos os recursos</li><li>Suporte pelo WhatsApp</li><li>Preço garantido por 12 meses</li></ul><a class="btn primary" href="#comecar" data-plan="Anual">Quero o anual</a></div>
+  </div>
+
+  <div class="order" id="comecar">
+    <div class="pitch">
+      <h3>Comece agora. Leva 2 minutos.</h3>
+      <p style="opacity:.9;margin:0">Você cria seu acesso aqui, instala a extensão no Chrome e o painel abre dentro do seu WhatsApp Web.</p>
+      <ol><li>Preencha os dados ao lado.</li><li>Baixe e instale a extensão.</li><li>Entre com seu e-mail e a senha que você criou.</li></ol>
+      <p class="small" style="color:#CBD5E1;margin:16px 0 0">Prefere falar com alguém? <a href="https://wa.me/5579981697274?text=Ol%C3%A1!%20Quero%20conhecer%20o%20Opex%20Care%20para%20sal%C3%B5es%20e%20barbearias." target="_blank" rel="noopener" style="color:var(--gold)">Chame no WhatsApp</a>.</p>
+    </div>
+    <div>
+      <form class="box" id="pedido" novalidate>
+        <h3>Criar meu acesso</h3><div class="small">O teste é liberado na hora. Planos pagos são liberados após o pagamento.</div>
+        <label class="f" for="p-name">Seu nome ou da empresa</label><input class="in" id="p-name" name="name" required autocomplete="name">
+        <div class="two">
+          <div><label class="f" for="p-phone">WhatsApp com DDD</label><input class="in" id="p-phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="(79) 99999-9999"></div>
+          <div><label class="f" for="p-email">E-mail</label><input class="in" id="p-email" name="email" type="email" required autocomplete="email"></div>
+        </div>
+        <div class="two">
+          <div><label class="f" for="p-seg">Seu ramo</label><select class="in" id="p-seg" name="segment"><option value="clinicas" >Clínica ou consultório</option><option value="saloes" selected>Salão ou barbearia</option><option value="seguros" >Corretora de seguros</option><option value="varejo" >Loja ou varejo</option><option value="outro" >Outro</option></select></div>
+          <div><label class="f" for="p-plan">Plano</label><select class="in" id="p-plan" name="plan"><option value="Teste">Teste grátis · 3 dias</option><option value="Mensal">Mensal · R$ 40</option><option value="Semestral">Semestral · R$ 200</option><option value="Anual">Anual · R$ 300</option></select></div>
+        </div>
+        <label class="f" for="p-pass">Crie uma senha (mínimo 8 caracteres)</label><input class="in" id="p-pass" name="password" type="password" minlength="8" required autocomplete="new-password">
+        <div class="hp" aria-hidden="true"><label>Não preencha<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div style="margin-top:18px"><button class="btn gold block" id="p-btn" type="submit">Liberar meu teste grátis</button></div>
+        <div class="fmsg" id="p-msg" role="alert"></div>
+        <div class="small">Ao continuar você concorda com os <a href="../termos.html">termos de uso</a> e a <a href="../privacidade.html">política de privacidade</a>.</div>
+      </form>
+      <div class="box done" id="p-done" style="background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq" class="alt"><div class="wrap">
+  <div class="kicker">Dúvidas</div>
+  <h2>Perguntas frequentes</h2>
+  <div class="faq" style="max-width:840px">
+    <details><summary>Preciso trocar de número ou de sistema?</summary><p>Não. O Opex Care é uma extensão do Chrome que abre dentro do WhatsApp Web, com o número que você já usa. A agenda continua sendo a sua Google Agenda.</p></details>
+    <details><summary>As mensagens saem com o computador desligado?</summary><p>Não. Os envios saem pelo seu WhatsApp Web, então o Chrome precisa estar aberto com o WhatsApp conectado. Se estiver fechado na hora, a mensagem sai assim que você abrir, e o Chrome avisa que há envios aguardando.</p></details>
+    <details><summary>Meu número pode ser bloqueado?</summary><p>O envio usa intervalos aleatórios, pausas, limite diário e variações de texto, que reduzem o risco. Nenhuma ferramenta garante que o WhatsApp não bloqueie. Envie mensagens de serviço para quem é seu cliente e respeite quem pede para não receber.</p></details>
+    <details><summary>Onde ficam os dados dos meus clientes?</summary><p>No seu navegador, com backup automático na sua conta do Google Drive, se você ativar. O servidor da OPEX guarda apenas os dados da sua licença: nome, contato e plano.</p></details>
+    <details><summary>Em quantos computadores posso usar?</summary><p>Cada licença vale para um computador. Se você precisa de mais, fale com a gente e ajustamos a licença.</p></details>
+    <details><summary>O que acontece depois dos 3 dias de teste?</summary><p>O painel trava até você escolher um plano. Seus clientes e históricos continuam guardados e voltam assim que a licença é liberada.</p></details>
+    <details><summary>Um cliente pode pedir para não receber lembretes?</summary><p>Sim. Escreva "sem lembrete" na descrição do evento da agenda e o sistema não envia para aquele horário.</p></details>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <h2>Veja funcionando no seu WhatsApp ainda hoje</h2>
+  <p>Três dias com todos os recursos, sem cartão. Se não fizer diferença no seu dia, é só não continuar.</p>
+  <div class="ctas" style="justify-content:center"><a class="btn gold" href="#comecar" data-plan="Teste">Começar teste grátis</a><a class="btn light" href="https://wa.me/5579981697274?text=Ol%C3%A1!%20Quero%20tirar%20uma%20d%C3%BAvida%20sobre%20o%20Opex%20Care." target="_blank" rel="noopener">Tirar dúvida no WhatsApp</a></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>© 2026 Opex Care · OPEX Business Growth · Aracaju/SE</div>
+  <div><a href="../instalar.html">Como instalar</a><a href="../privacidade.html">Privacidade</a><a href="../termos.html">Termos de uso</a></div>
+</div></footer>
+<div class="mbar"><a class="btn gold" href="#comecar" data-plan="Teste">Testar grátis</a><a class="btn light" href="https://wa.me/5579981697274?text=Ol%C3%A1!%20Quero%20conhecer%20o%20Opex%20Care." target="_blank" rel="noopener">WhatsApp</a></div>
+
+<script>
+(function(){
+  var API="https://opex-care-licencas.netlify.app/api/order",DL="https://opex-care-licencas.netlify.app/download/opex-care.zip",WA="5579981697274";
+  var f=document.getElementById('pedido');if(!f)return;
+  var plan=document.getElementById('p-plan'),btn=document.getElementById('p-btn'),msg=document.getElementById('p-msg'),done=document.getElementById('p-done');
+  function label(){btn.textContent=plan.value==='Teste'?'Liberar meu teste grátis':'Fazer meu pedido';}
+  plan.addEventListener('change',label);label();
+  document.querySelectorAll('[data-plan]').forEach(function(a){a.addEventListener('click',function(){plan.value=a.getAttribute('data-plan');label();});});
+  function wa(t){return 'https://wa.me/'+WA+'?text='+encodeURIComponent(t);}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();msg.className='fmsg';msg.textContent='';
+    var d={name:f.name.value.trim(),phone:f.phone.value.trim(),email:f.email.value.trim(),segment:f.segment.value,plan:plan.value,password:f.password.value,website:f.website.value};
+    if(d.password.length<8){msg.className='fmsg err';msg.textContent='A senha precisa ter pelo menos 8 caracteres.';return;}
+    btn.disabled=true;var old=btn.textContent;btn.textContent='Enviando…';
+    fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(d)})
+     .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
+     .then(function(x){
+       if(!x.j.ok){btn.disabled=false;btn.textContent=old;msg.className='fmsg err';msg.innerHTML=(x.j.message||'Não foi possível enviar.')+(x.s===409?' <a href="'+wa('Olá! Já tenho cadastro no Opex Care e quero liberar meu acesso.')+'" target="_blank" rel="noopener">Chamar no WhatsApp</a>':'');return;}
+       f.style.display='none';done.style.display='block';
+       var first=d.name.split(' ')[0];
+       if(x.j.trial){
+         done.innerHTML='<h3>Teste liberado, '+first.replace(/[<>&]/g,'')+'! ✅</h3><p>Você tem 3 dias com todos os recursos. Faltam 3 passos:</p><ol><li><a class="btn gold sm" href="'+(x.j.downloadUrl||DL)+'">Baixar a extensão</a></li><li>Instale no Chrome seguindo o <a href="'+(location.pathname.indexOf('/segmentos/')>-1?'../':'')+'instalar.html" target="_blank">passo a passo (2 minutos)</a>.</li><li>Abra o WhatsApp Web e entre no painel com o e-mail <b></b> e a senha que você acabou de criar.</li></ol><p class="small">Precisa de ajuda para instalar? <a href="'+wa('Olá! Liberei meu teste do Opex Care e quero ajuda para instalar.')+'" target="_blank" rel="noopener">Chame a gente no WhatsApp</a>.</p>';
+         done.querySelector('b').textContent=d.email;
+       }else{
+         done.innerHTML='<h3>Pedido recebido, '+first.replace(/[<>&]/g,'')+'! ✅</h3><p>Seu cadastro do plano <b></b> está feito. Para liberar hoje mesmo, chame a gente no WhatsApp e receba os dados de pagamento.</p><p><a class="btn gold" target="_blank" rel="noopener" href="'+wa('Olá! Fiz o pedido do Opex Care, plano '+d.plan+', no nome '+d.name+'. Quero os dados para pagamento.')+'">Receber dados de pagamento no WhatsApp</a></p>';
+         done.querySelector('b').textContent=d.plan;
+       }
+       done.scrollIntoView({block:'center'});
+     })
+     .catch(function(){btn.disabled=false;btn.textContent=old;msg.className='fmsg err';msg.innerHTML='Sem conexão com o servidor. <a href="'+wa('Olá! Quero testar o Opex Care.')+'" target="_blank" rel="noopener">Peça pelo WhatsApp</a>.';});
+  });
+})();
+</script>
+</body></html>

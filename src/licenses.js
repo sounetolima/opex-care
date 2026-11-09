@@ -4,7 +4,12 @@ const crypto = require('node:crypto');
 const { hashPassword, verifyPassword, signToken, verifyToken } = require('./auth');
 
 const DAY = 864e5;
-const PLAN_DAYS = { Mensal: 30, Trimestral: 90, Anual: 365, Teste: 7, 'Vitalício': null };
+const PLAN_DAYS = { Teste: 3, Mensal: 30, Semestral: 180, Anual: 365, 'Vitalício': null };
+const PLAN_PRICE = { Mensal: 40, Semestral: 200, Anual: 300 };
+const ORDER_PLANS = ['Teste', 'Mensal', 'Semestral', 'Anual'];
+const SEEN_EVERY = 3600e3;      // só regrava o "visto por último" de hora em hora
+const LOGIN_TRIES = 8;          // tentativas de senha do painel por IP
+const LOGIN_WINDOW = 15 * 60e3; // a cada 15 minutos
 const MAX_LOGO_CHARS = 300 * 1024; // logo em data URL, já reduzida no navegador
 
 function createLicenseService({ store, secret, adminPassword }) {
@@ -21,6 +26,7 @@ function createLicenseService({ store, secret, adminPassword }) {
     db.licenses = Array.isArray(db.licenses) ? db.licenses : [];
     db.settings = db.settings || { downloadUrl: '' };
     db.admin = db.admin || null;
+    db.tries = db.tries || {};
     return db;
   }
   const save = (db) => store.save(db);
@@ -77,14 +83,19 @@ function createLicenseService({ store, secret, adminPassword }) {
     if (!data || data.role !== 'admin') throw fail(401, 'Sessão expirada. Entre de novo.');
   }
 
-  async function adminLogin(password) {
+  async function adminLogin(password, ip = '') {
     const db = await load();
+    const now = Date.now();
+    Object.keys(db.tries).forEach((k) => { if (now - db.tries[k].at > LOGIN_WINDOW) delete db.tries[k]; });
+    const t = db.tries[ip || '-'];
+    if (t && t.n >= LOGIN_TRIES) throw fail(429, 'Muitas tentativas. Aguarde 15 minutos.');
+    const wrong = async () => { db.tries[ip || '-'] = { n: (t ? t.n : 0) + 1, at: t ? t.at : now }; await save(db); throw fail(401, 'Senha incorreta.'); };
     if (!db.admin) {
-      if (!adminPassword || String(password) !== String(adminPassword)) throw fail(401, 'Senha incorreta.');
+      if (!adminPassword || String(password) !== String(adminPassword)) await wrong();
       db.admin = { hash: hashPassword(password) };
       await save(db);
     } else if (!verifyPassword(password, db.admin.hash)) {
-      throw fail(401, 'Senha incorreta.');
+      await wrong();
     }
     return { ok: true, token: signToken({ role: 'admin' }, secret) };
   }
@@ -194,18 +205,29 @@ function createLicenseService({ store, secret, adminPassword }) {
   // ---------- site: pedido de assinatura (fica pendente até o administrador aprovar) ----------
   async function createOrder(body) {
     const fields = sanitizeLicenseFields({ ...body, maxDevices: body.maxDevices || 1 });
-    if (!PLAN_DAYS.hasOwnProperty(fields.plan)) throw fail(400, 'Plano inválido.');
+    if (!ORDER_PLANS.includes(fields.plan)) throw fail(400, 'Plano inválido.');
+    if (body.website) return { ok: true, message: 'Pedido recebido.' }; // campo-isca: robôs preenchem, pessoas não
+    if (digits(fields.phone).length < 10) throw fail(400, 'Informe o WhatsApp com DDD.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(fields.email)) throw fail(400, 'Informe um e-mail válido.');
     if (String(body.password || '').length < 8) throw fail(400, 'A senha precisa ter pelo menos 8 caracteres.');
     const db = await load();
     const now = Date.now();
+    const dup = db.licenses.find((x) => (x.email && x.email === fields.email) || (digits(x.phone) && digits(x.phone).slice(-10) === digits(fields.phone).slice(-10)));
+    if (dup) throw fail(409, 'Já existe um cadastro com este e-mail ou WhatsApp. Fale com a gente no WhatsApp para liberar ou renovar.');
+    const trial = fields.plan === 'Teste';
+    const segment = String(body.segment || '').slice(0, 40);
     const l = {
-      key: newKey(), ...fields, status: 'pending', expiresAt: null, devices: [],
+      key: newKey(), ...fields, notes: segment ? 'Segmento: ' + segment : '',
+      // Teste grátis entra na hora (3 dias, 1 computador). Planos pagos aguardam a aprovação no painel.
+      status: trial ? 'active' : 'pending', expiresAt: trial ? now + PLAN_DAYS.Teste * DAY : null, devices: [],
       pwHash: hashPassword(body.password), brand: { name: '', logo: '' },
-      order: { status: 'pendente', label: fields.plan, amount: null, createdAt: now }, createdAt: now,
+      order: { status: trial ? 'aprovado' : 'pendente', label: trial ? 'Teste grátis 3 dias' : fields.plan, amount: PLAN_PRICE[fields.plan] || null, createdAt: now }, createdAt: now,
     };
     db.licenses.push(l);
     await save(db);
-    return { ok: true, message: 'Pedido recebido. A OPEX vai liberar seu acesso.' };
+    return trial
+      ? { ok: true, trial: true, downloadUrl: db.settings.downloadUrl || '', message: 'Teste liberado por 3 dias. Instale a extensão e entre com seu e-mail e a senha.' }
+      : { ok: true, trial: false, message: 'Pedido recebido. Vamos confirmar o pagamento e liberar seu acesso pelo WhatsApp.' };
   }
 
   // ---------- extensão ----------
@@ -231,11 +253,12 @@ function createLicenseService({ store, secret, adminPassword }) {
         return { ok: false, status: 'limit', message: `Limite de ${l.maxDevices} computador(es) atingido. Libere um computador no painel.` };
       }
       l.devices = [...(l.devices || []), { id: deviceId, version: String(body.version || ''), lastSeen: now }];
-    } else {
+      await save(db);
+    } else if (now - (dev.lastSeen || 0) > SEEN_EVERY || (body.version && body.version !== dev.version)) {
       dev.lastSeen = now;
       dev.version = String(body.version || dev.version || '');
+      await save(db);
     }
-    await save(db);
     return {
       ok: true, status: 'active', message: 'Licença ativa.', key: l.key, plan: l.plan,
       expiresAt: l.expiresAt, brand: l.brand || { name: '', logo: '' },
@@ -264,9 +287,9 @@ function createLicenseService({ store, secret, adminPassword }) {
   // ---------- roteamento ----------
   const ADMIN_OPEN = ['/admin/login', '/admin/forgot', '/admin/reset'];
 
-  async function route(method, path, body = {}, token = '') {
+  async function route(method, path, body = {}, token = '', ip = '') {
     if (path.startsWith('/admin/') && !ADMIN_OPEN.includes(path)) requireAdmin(token);
-    if (method === 'POST' && path === '/admin/login') return adminLogin(body.password);
+    if (method === 'POST' && path === '/admin/login') return adminLogin(body.password, ip);
     if (method === 'POST' && path === '/admin/forgot') return { ok: true, message: 'Recuperação por e-mail ainda não está ativa. Peça a redefinição ao suporte técnico.' };
     if (method === 'POST' && path === '/admin/reset') throw fail(400, 'Link de redefinição indisponível.');
     if (method === 'POST' && path === '/admin/change-password') return changePassword(body);
@@ -286,4 +309,4 @@ function createLicenseService({ store, secret, adminPassword }) {
   return { route, verify, login, createOrder, requireAdmin };
 }
 
-module.exports = { createLicenseService, PLAN_DAYS };
+module.exports = { createLicenseService, PLAN_DAYS, PLAN_PRICE };

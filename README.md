@@ -12,3 +12,9 @@ Clone do painel de licenças do Opex Agent, adaptado para o Opex Care (versão L
 
 ## Testes
     npm test
+
+## Pastas
+- `public/` e `netlify/`: painel de licenças e API (site `opex-care-licencas`).
+- `site/`: site de vendas (site `opex-care-site`, diretório base `site`). Gerado por `node tools/build-site.js site`.
+- `extension/`: código da extensão do Chrome (versão enviada à Chrome Web Store).
+- `public/download/opex-care.zip`: extensão para instalação manual.
