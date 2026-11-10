@@ -1,4 +1,4 @@
-// Opex Care — ponte entre a extensão (mundo isolado) e o WhatsApp Web (mundo da página).
+// Opex Fideliza — ponte entre a extensão (mundo isolado) e o WhatsApp Web (mundo da página).
 // Expõe um conjunto pequeno e fechado de ações; nada além disso é acessível pela extensão.
 (() => {
   'use strict';

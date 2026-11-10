@@ -1,4 +1,4 @@
-// Opex Care — motor: envios com segurança, pós-atendimento programado e disparos em massa.
+// Opex Fideliza — motor: envios com segurança, pós-atendimento programado e disparos em massa.
 /* global OA */
 (() => {
   'use strict';
@@ -156,6 +156,7 @@
     try {
       if (OA.calendar) await OA.calendar.maybeSync();
       if (OA.backup) OA.backup.maybeRun();
+      await E.checkInactivity();
       await E.runFollowups();
       await E.runQueue();
     } finally {
@@ -172,11 +173,43 @@
   };
 
   E.onMessage = async (m) => {
-    // Cliente respondeu: registra e mantém os retornos pendentes para revisão manual.
     const id = m && m.chatId;
-    if (!id || (m && m.fromMe)) return;
+    if (!id) return;
     const c = S.contact(id);
-    if (c) { c.lastInbound = Date.now(); }
+    if (!c) return;
+    // Atendente falou: reinicia a contagem de inatividade.
+    if (m.fromMe) {
+      if (c.attendance && c.attendance.status === 'open') { c.attendance.lastOutAt = Date.now(); c.attendance.warnedAt = 0; }
+      return;
+    }
+    c.lastInbound = Date.now();
+  };
+
+  // Inatividade no atendimento: aviso ao cliente e encerramento automático.
+  // O relógio conta desde a última mensagem do atendente. Se o cliente responder, a contagem para.
+  E.checkInactivity = async () => {
+    const s = set();
+    const now = Date.now();
+    const warnMs = (s.idleWarnMin || 7) * 60e3;
+    const closeMs = (s.idleCloseMin || 10) * 60e3;
+    for (const c of Object.values(S.state.contacts)) {
+      const a = c.attendance;
+      if (!a || a.status !== 'open') continue;
+      if ((c.lastInbound || 0) > (a.lastOutAt || a.startedAt)) continue; // cliente respondeu
+      const idle = now - (a.lastOutAt || a.startedAt);
+      if (idle >= closeMs) {
+        S.closeAttendance(c.id, { reason: 'Encerrado automaticamente por inatividade', saveProtocol: false });
+        S.commit(true);
+        continue;
+      }
+      if (idle >= warnMs && !a.warnedAt) {
+        a.warnedAt = now;
+        S.commit(true);
+        const left = Math.max(1, Math.round((closeMs - idle) / 60e3));
+        const tpl = String(s.idleWarnMsg || '').replace(/\{minutos_restantes\}/gi, String(left));
+        await E.notifyClient(c, tpl, S.attName(a.attId));
+      }
+    }
   };
 
   E.recover = () => {

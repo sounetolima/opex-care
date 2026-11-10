@@ -1,4 +1,4 @@
-// Opex Care — interface enxuta: painel lateral dentro de Shadow DOM.
+// Opex Fideliza — interface enxuta: painel lateral dentro de Shadow DOM.
 /* global chrome, OA */
 (() => {
   'use strict';
@@ -194,8 +194,19 @@
     }).join('');
   }
 
+  // Agenda do dia: compromissos de hoje vindos da Google Agenda, em ordem de horário.
+  function agendaHoje() {
+    const t0 = new Date(); t0.setHours(0, 0, 0, 0);
+    const t1 = t0.getTime() + 864e5;
+    const hoje = (st().appointments || []).filter((a) => a.start >= t0.getTime() && a.start < t1).sort((a, b) => a.start - b.start);
+    const hora = (ts) => new Date(ts).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    return `<div class="card"><b>Agenda de hoje (${hoje.length})</b>
+      ${hoje.map((a) => `<div class="irow"><div class="itx"><b>${hora(a.start)} · ${esc(a.name || 'Cliente')}</b><small>${esc(a.service || 'Atendimento')}${a.unit ? ' · ' + esc(a.unit) : ''}${a.professional ? ' · ' + esc(a.professional) : ''}</small></div></div>`).join('') || '<div class="muted small">Nada agendado para hoje.</div>'}
+    </div>`;
+  }
+
   function clientesTab() {
-    return `<div class="card"><b>Clientes</b><div class="muted small">Busque por nome ou telefone. Toque no cliente para ver agendamentos, lembretes e o histórico PU.</div>
+    return `${agendaHoje()}<div class="card"><b>Clientes</b><div class="muted small">Busque por nome ou telefone. Toque no cliente para ver agendamentos, lembretes e o histórico PU.</div>
       <input class="in" id="cl-q" placeholder="Nome ou telefone" value="${esc(ui.clQuery || '')}" style="margin-top:8px">
       <div id="cl-list" style="margin-top:10px">${clientesList()}</div></div>`;
   }
@@ -370,8 +381,8 @@
     const br = set().brand || {};
     const prof = OA.profiles && OA.profiles.get(set().profile);
     const bn = shadow.querySelector('.brand-name'), bs = shadow.querySelector('.brand-sub'), bl = shadow.querySelector('.brand-logo');
-    if (bn) bn.textContent = br.name || 'Opex Care';
-    if (bs) bs.textContent = br.name ? 'Opex Care' : (prof ? prof.name : 'CRM para WhatsApp');
+    if (bn) bn.textContent = br.name || 'Opex Fideliza';
+    if (bs) bs.textContent = br.name ? 'Opex Fideliza' : (prof ? prof.name : 'CRM para WhatsApp');
     if (bl && br.logo && bl.getAttribute('src') !== br.logo) bl.src = br.logo;
     if (!OA.license.ok) { body.innerHTML = lockCard(); return; }
     body.innerHTML = (TAB_FN[ui.tab] || hojeTab)();
@@ -610,9 +621,9 @@
     const css = await fetch(chrome.runtime.getURL('src/ui.css')).then((r) => r.text());
     const logo = chrome.runtime.getURL('icons/icon48.png');
     shadow.innerHTML = `<style>${css}</style>
-      <button class="launcher" data-a="panel-toggle" title="Abrir Opex Care"><img src="${logo}" alt="Opex Care"><span class="badge" style="display:none">0</span></button>
+      <button class="launcher" data-a="panel-toggle" title="Abrir Opex Fideliza"><img src="${logo}" alt="Opex Fideliza"><span class="badge" style="display:none">0</span></button>
       <aside class="drawer open">
-        <div class="head"><img class="brand-logo" src="${logo}" alt=""><div class="brand"><b class="brand-name">Opex Care</b><span class="brand-sub">CRM para WhatsApp</span></div>
+        <div class="head"><img class="brand-logo" src="${logo}" alt=""><div class="brand"><b class="brand-name">Opex Fideliza</b><span class="brand-sub">CRM para WhatsApp</span></div>
           <button class="icon-btn" data-a="panel-toggle" title="Fechar">✕</button></div>
         <nav class="tabs"></nav>
         <div class="body"></div>

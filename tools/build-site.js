@@ -1,4 +1,4 @@
-// Gera o site de vendas do Opex Care: página principal, uma página por segmento, instalação e páginas legais.
+// Gera o site de vendas do Opex Fideliza: página principal, uma página por segmento, instalação e páginas legais.
 // Uso: node build-site.js <pasta de saída>
 const fs = require('fs');
 const path = require('path');
@@ -114,11 +114,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 const SEGS = {
   clinicas: {
     file: 'clinicas', label: 'Clínicas e odontologia', emoji: '🦷', who: 'paciente', whoPl: 'pacientes',
-    title: 'Opex Care para clínicas e consultórios — menos faltas, mais retornos',
+    title: 'Opex Fideliza para clínicas e consultórios — menos faltas, mais retornos',
     desc: 'Lembrete automático da consulta no WhatsApp, pós-atendimento programado e histórico de cada paciente. Teste grátis por 3 dias.',
     eyebrow: 'Para clínicas, consultórios e odontologia',
     h1: 'Agenda cheia de quem <em>realmente aparece</em>.',
-    lead: 'O Opex Care lê a Google Agenda da sua clínica e avisa cada paciente no WhatsApp, com o procedimento, o horário e o profissional. Depois do atendimento, ele mesmo pergunta como o paciente está e chama para o retorno.',
+    lead: 'O Opex Fideliza lê a Google Agenda da sua clínica e avisa cada paciente no WhatsApp, com o procedimento, o horário e o profissional. Depois do atendimento, ele mesmo pergunta como o paciente está e chama para o retorno.',
     company: 'Clínica Sorriso',
     bubbles: [['📅 Lembrete', 'Boa tarde, Maria! Lembrete: amanhã (07/11) às 15:00 você tem limpeza completa na Clínica Sorriso com a Dra. Ana. Estamos aguardando a sua presença! 😊', '16:04'], ['me', 'Confirmado, obrigada! 👍', '16:05'], ['💬 Pós-atendimento', 'Maria, tudo bem por aí? Passando para saber como você está depois do procedimento.', '2 horas depois']],
     before: ['A recepção perde a manhã ligando para confirmar consulta', 'Paciente falta e o horário fica vazio', 'Depois do procedimento ninguém pergunta como ele ficou', 'O retorno de 6 meses depende da memória de alguém'],
@@ -127,11 +127,11 @@ const SEGS = {
   },
   saloes: {
     file: 'saloes', label: 'Salões e barbearias', emoji: '💈', who: 'cliente', whoPl: 'clientes',
-    title: 'Opex Care para salões e barbearias — cliente voltando todo mês',
+    title: 'Opex Fideliza para salões e barbearias — cliente voltando todo mês',
     desc: 'Lembrete do horário no WhatsApp, aviso de retorno e aniversariantes para salão de beleza e barbearia. Teste grátis por 3 dias.',
     eyebrow: 'Para salões de beleza e barbearias',
     h1: 'Cadeira ocupada e cliente <em>voltando todo mês</em>.',
-    lead: 'O Opex Care avisa o cliente do horário, com o serviço e o profissional. Trinta dias depois, ele lembra que está na hora de voltar. Você cuida do atendimento e o WhatsApp cuida da agenda.',
+    lead: 'O Opex Fideliza avisa o cliente do horário, com o serviço e o profissional. Trinta dias depois, ele lembra que está na hora de voltar. Você cuida do atendimento e o WhatsApp cuida da agenda.',
     company: 'Barbearia Dom',
     bubbles: [['📅 Lembrete', 'Boa tarde, Rafael! Amanhã às 18:30 você tem horário: corte e barba com o Léo na Barbearia Dom. Te esperamos! ✂️', '17:10'], ['me', 'Fechado! 💈', '17:12'], ['🔁 Retorno', 'Rafael, já faz um mês do seu último corte. Quer que eu separe um horário para você esta semana?', '30 dias depois']],
     before: ['Cliente esquece o horário e a cadeira fica parada', 'Você descobre o cancelamento em cima da hora', 'Quem veio uma vez não é chamado de volta', 'Aniversário do cliente passa em branco'],
@@ -140,11 +140,11 @@ const SEGS = {
   },
   seguros: {
     file: 'seguros', label: 'Corretoras de seguros', emoji: '🛡️', who: 'segurado', whoPl: 'segurados',
-    title: 'Opex Care para corretoras de seguros — renovação na hora certa',
+    title: 'Opex Fideliza para corretoras de seguros — renovação na hora certa',
     desc: 'Funil de cotação, aviso de renovação e histórico de cada segurado dentro do WhatsApp Web. Teste grátis por 3 dias.',
     eyebrow: 'Para corretoras e corretores de seguros',
     h1: 'Nenhuma renovação <em>perdida por esquecimento</em>.',
-    lead: 'O Opex Care organiza a sua carteira dentro do WhatsApp Web: do lead à apólice ativa. O vencimento marcado na agenda vira aviso automático para o segurado, e cada conversa fica registrada com protocolo.',
+    lead: 'O Opex Fideliza organiza a sua carteira dentro do WhatsApp Web: do lead à apólice ativa. O vencimento marcado na agenda vira aviso automático para o segurado, e cada conversa fica registrada com protocolo.',
     company: 'Corretora Aliança',
     bubbles: [['🛡️ Renovação', 'Bom dia, Carla! Sua apólice de seguro auto vence em 12/11. Quer que eu cuide da renovação para você? 😊', '09:00'], ['me', 'Quero sim, pode mandar a proposta', '09:14'], ['💬 Pós-venda', 'Carla, sua apólice já está ativa. Qualquer dúvida sobre cobertura ou sinistro, é só chamar por aqui.', '2 horas depois']],
     before: ['O vencimento passa e o cliente renova com outro corretor', 'Cotação enviada fica sem retorno', 'Cada corretor guarda a carteira em uma planilha diferente', 'Ninguém sabe o que foi combinado na última conversa'],
@@ -153,11 +153,11 @@ const SEGS = {
   },
   varejo: {
     file: 'varejo', label: 'Varejo e lojas', emoji: '🛍️', who: 'cliente', whoPl: 'clientes',
-    title: 'Opex Care para lojas e varejo — quem comprou volta a comprar',
+    title: 'Opex Fideliza para lojas e varejo — quem comprou volta a comprar',
     desc: 'Pós-venda automático, recompra, aniversariantes e funil de vendas dentro do WhatsApp Web. Teste grátis por 3 dias.',
     eyebrow: 'Para lojas, ópticas e varejo',
     h1: 'Quem comprou uma vez <em>volta a comprar</em>.',
-    lead: 'O Opex Care registra cada venda no WhatsApp Web e programa o pós-venda: como foi a compra, hora de repor, aniversário. Seu vendedor atende; as mensagens de relacionamento saem sozinhas.',
+    lead: 'O Opex Fideliza registra cada venda no WhatsApp Web e programa o pós-venda: como foi a compra, hora de repor, aniversário. Seu vendedor atende; as mensagens de relacionamento saem sozinhas.',
     company: 'Óptica Visão',
     bubbles: [['🛍️ Pós-venda', 'Boa tarde, João! Tudo certo com os seus óculos novos? Se precisar de qualquer ajuste, é só passar aqui. 😊', '2 horas depois'], ['me', 'Ficaram ótimos, obrigado!', '15:40'], ['🎂 Aniversário', 'João, feliz aniversário! 🎉 Que este novo ano traga muitas coisas boas. Obrigado por confiar na gente.', '08:00']],
     before: ['A venda termina no caixa e o cliente some', 'Ninguém avisa quando é hora de repor ou revisar', 'Promoção vai para todo mundo, igual, e o número é bloqueado', 'O vendedor sai e o histórico vai embora com ele'],
@@ -168,11 +168,11 @@ const SEGS = {
 
 const GENERIC = {
   label: '', who: 'cliente', whoPl: 'clientes',
-  title: 'Opex Care — lembretes, pós-atendimento e relacionamento no WhatsApp Web',
+  title: 'Opex Fideliza — lembretes, pós-atendimento e relacionamento no WhatsApp Web',
   desc: 'O CRM leve que vive dentro do WhatsApp Web: lembretes da agenda, pós-atendimento automático, aniversariantes e histórico de cada cliente. Teste grátis por 3 dias.',
   eyebrow: 'Clínicas · Salões · Barbearias · Corretoras · Lojas',
   h1: 'Seu WhatsApp lembra, acompanha e <em>traz o cliente de volta</em>.',
-  lead: 'O Opex Care é um painel que abre dentro do WhatsApp Web que você já usa. Ele avisa o cliente do horário, pergunta como foi depois do atendimento e chama para voltar — enquanto você cuida de quem está na sua frente.',
+  lead: 'O Opex Fideliza é um painel que abre dentro do WhatsApp Web que você já usa. Ele avisa o cliente do horário, pergunta como foi depois do atendimento e chama para voltar — enquanto você cuida de quem está na sua frente.',
   company: 'Sua empresa',
   bubbles: [['📅 Lembrete', 'Boa tarde, Maria! Lembrete: amanhã (07/11) às 15:00 você tem limpeza completa na Clínica Sorriso. Estamos aguardando a sua presença! 😊', '16:04'], ['me', 'Confirmado, obrigada! 👍', '16:05'], ['💬 Pós-atendimento', 'Maria, tudo bem por aí? Passando para saber como você está depois do atendimento.', '2 horas depois']],
   before: ['Alguém da equipe para tudo para confirmar horário, um por um', 'Cliente falta, ninguém foi avisado e o horário fica vazio', 'Depois do atendimento ou da venda, o contato acaba', 'O histórico do cliente está na cabeça de quem atendeu'],
@@ -214,7 +214,7 @@ const topbar = (root, cta = true) => `
 
 const footer = (root) => `
 <footer><div class="wrap">
-  <div>© 2026 Opex Care · OPEX Business Growth · Aracaju/SE</div>
+  <div>© 2026 Opex Fideliza · OPEX Business Growth · Aracaju/SE</div>
   <div><a href="${root}instalar.html">Como instalar</a><a href="${root}privacidade.html">Privacidade</a><a href="${root}termos.html">Termos de uso</a></div>
 </div></footer>`;
 
@@ -240,19 +240,19 @@ const orderScript = `
     fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(d)})
      .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
      .then(function(x){
-       if(!x.j.ok){btn.disabled=false;btn.textContent=old;msg.className='fmsg err';msg.innerHTML=(x.j.message||'Não foi possível enviar.')+(x.s===409?' <a href="'+wa('Olá! Já tenho cadastro no Opex Care e quero liberar meu acesso.')+'" target="_blank" rel="noopener">Chamar no WhatsApp</a>':'');return;}
+       if(!x.j.ok){btn.disabled=false;btn.textContent=old;msg.className='fmsg err';msg.innerHTML=(x.j.message||'Não foi possível enviar.')+(x.s===409?' <a href="'+wa('Olá! Já tenho cadastro no Opex Fideliza e quero liberar meu acesso.')+'" target="_blank" rel="noopener">Chamar no WhatsApp</a>':'');return;}
        f.style.display='none';done.style.display='block';
        var first=d.name.split(' ')[0];
        if(x.j.trial){
-         done.innerHTML='<h3>Teste liberado, '+first.replace(/[<>&]/g,'')+'! ✅</h3><p>Você tem 3 dias com todos os recursos. Faltam 3 passos:</p><ol><li><a class="btn gold sm" href="'+(x.j.downloadUrl||DL)+'">Baixar a extensão</a></li><li>Instale no Chrome seguindo o <a href="'+(location.pathname.indexOf('/segmentos/')>-1?'../':'')+'instalar.html" target="_blank">passo a passo (2 minutos)</a>.</li><li>Abra o WhatsApp Web e entre no painel com o e-mail <b></b> e a senha que você acabou de criar.</li></ol><p class="small">Precisa de ajuda para instalar? <a href="'+wa('Olá! Liberei meu teste do Opex Care e quero ajuda para instalar.')+'" target="_blank" rel="noopener">Chame a gente no WhatsApp</a>.</p>';
+         done.innerHTML='<h3>Teste liberado, '+first.replace(/[<>&]/g,'')+'! ✅</h3><p>Você tem 3 dias com todos os recursos. Faltam 3 passos:</p><ol><li><a class="btn gold sm" href="'+(x.j.downloadUrl||DL)+'">Baixar a extensão</a></li><li>Instale no Chrome seguindo o <a href="'+(location.pathname.indexOf('/segmentos/')>-1?'../':'')+'instalar.html" target="_blank">passo a passo (2 minutos)</a>.</li><li>Abra o WhatsApp Web e entre no painel com o e-mail <b></b> e a senha que você acabou de criar.</li></ol><p class="small">Precisa de ajuda para instalar? <a href="'+wa('Olá! Liberei meu teste do Opex Fideliza e quero ajuda para instalar.')+'" target="_blank" rel="noopener">Chame a gente no WhatsApp</a>.</p>';
          done.querySelector('b').textContent=d.email;
        }else{
-         done.innerHTML='<h3>Pedido recebido, '+first.replace(/[<>&]/g,'')+'! ✅</h3><p>Seu cadastro do plano <b></b> está feito. Para liberar hoje mesmo, chame a gente no WhatsApp e receba os dados de pagamento.</p><p><a class="btn gold" target="_blank" rel="noopener" href="'+wa('Olá! Fiz o pedido do Opex Care, plano '+d.plan+', no nome '+d.name+'. Quero os dados para pagamento.')+'">Receber dados de pagamento no WhatsApp</a></p>';
+         done.innerHTML='<h3>Pedido recebido, '+first.replace(/[<>&]/g,'')+'! ✅</h3><p>Seu cadastro do plano <b></b> está feito. Para liberar hoje mesmo, chame a gente no WhatsApp e receba os dados de pagamento.</p><p><a class="btn gold" target="_blank" rel="noopener" href="'+wa('Olá! Fiz o pedido do Opex Fideliza, plano '+d.plan+', no nome '+d.name+'. Quero os dados para pagamento.')+'">Receber dados de pagamento no WhatsApp</a></p>';
          done.querySelector('b').textContent=d.plan;
        }
        done.scrollIntoView({block:'center'});
      })
-     .catch(function(){btn.disabled=false;btn.textContent=old;msg.className='fmsg err';msg.innerHTML='Sem conexão com o servidor. <a href="'+wa('Olá! Quero testar o Opex Care.')+'" target="_blank" rel="noopener">Peça pelo WhatsApp</a>.';});
+     .catch(function(){btn.disabled=false;btn.textContent=old;msg.className='fmsg err';msg.innerHTML='Sem conexão com o servidor. <a href="'+wa('Olá! Quero testar o Opex Fideliza.')+'" target="_blank" rel="noopener">Peça pelo WhatsApp</a>.';});
   });
 })();
 </script>`;
@@ -286,10 +286,10 @@ ${topbar(root)}
 <section id="diferencial"><div class="wrap">
   <div class="kicker">O que muda</div>
   <h2>O mesmo dia de trabalho, sem a parte que ninguém tem tempo de fazer</h2>
-  <p class="sub">Relacionamento com ${p.who} não falha por falta de vontade. Falha porque depende de alguém lembrar. O Opex Care tira isso da memória da equipe.</p>
+  <p class="sub">Relacionamento com ${p.who} não falha por falta de vontade. Falha porque depende de alguém lembrar. O Opex Fideliza tira isso da memória da equipe.</p>
   <div class="ba">
     <div class="col before"><h3>Hoje</h3><ul>${p.before.map((x) => `<li>${x}</li>`).join('')}</ul></div>
-    <div class="col after"><h3>Com o Opex Care</h3><ul>${p.after.map((x) => `<li>${x}</li>`).join('')}</ul></div>
+    <div class="col after"><h3>Com o Opex Fideliza</h3><ul>${p.after.map((x) => `<li>${x}</li>`).join('')}</ul></div>
   </div>
   <div class="duo">
     <div class="card"><h3><span>🧑‍💼</span> O seu dia melhora</h3><ul>
@@ -309,8 +309,8 @@ ${topbar(root)}
 
 <section class="alt"><div class="wrap">
   <div class="kicker">Nosso diferencial</div>
-  <h2>Por que o Opex Care e não mais um sistema</h2>
-  <p class="sub">Ferramentas grandes pedem migração, treinamento e mensalidade por usuário. O Opex Care foi feito para quem quer resultado no mesmo dia.</p>
+  <h2>Por que o Opex Fideliza e não mais um sistema</h2>
+  <p class="sub">Ferramentas grandes pedem migração, treinamento e mensalidade por usuário. O Opex Fideliza foi feito para quem quer resultado no mesmo dia.</p>
   <div class="grid3">
     <div class="card"><div class="ico">💬</div><h3>Vive dentro do WhatsApp Web</h3><p>Não troca seu número, não exige API paga e não tem outro sistema para abrir. O painel aparece ao lado das suas conversas.</p></div>
     <div class="card"><div class="ico">🔒</div><h3>Seus dados ficam com você</h3><p>Clientes e histórico ficam no seu navegador, com backup na sua conta do Google Drive. Nossa parte guarda só a sua licença.</p></div>
@@ -336,7 +336,7 @@ ${topbar(root)}
 <section id="recursos" class="alt"><div class="wrap">
   <div class="kicker">Recursos</div>
   <h2>${segKey ? 'O que mais ajuda no seu ramo' : 'Só o que a sua equipe usa de verdade'}</h2>
-  <p class="sub">${segKey ? 'E todos os outros recursos do Opex Care continuam disponíveis.' : 'Sem módulo que ninguém abre. Tudo em um painel ao lado das conversas.'}</p>
+  <p class="sub">${segKey ? 'E todos os outros recursos do Opex Fideliza continuam disponíveis.' : 'Sem módulo que ninguém abre. Tudo em um painel ao lado das conversas.'}</p>
   <div class="grid3">${feats.map(([i, t, d]) => `<div class="card"><div class="ico">${i}</div><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
   ${segKey ? `<p style="margin-top:22px"><a href="${root}index.html#recursos" style="color:var(--blue);font-weight:700">Ver todos os recursos →</a></p>` : ''}
 </div></section>
@@ -368,7 +368,7 @@ ${segKey ? '' : `<section id="para-quem"><div class="wrap">
       <h3>Comece agora. Leva 2 minutos.</h3>
       <p style="opacity:.9;margin:0">Você cria seu acesso aqui, instala a extensão no Chrome e o painel abre dentro do seu WhatsApp Web.</p>
       <ol><li>Preencha os dados ao lado.</li><li>Baixe e instale a extensão.</li><li>Entre com seu e-mail e a senha que você criou.</li></ol>
-      <p class="small" style="color:#CBD5E1;margin:16px 0 0">Prefere falar com alguém? <a href="${wa('Olá! Quero conhecer o Opex Care' + (segKey ? ' para ' + p.label.toLowerCase() : '') + '.')}" target="_blank" rel="noopener" style="color:var(--gold)">Chame no WhatsApp</a>.</p>
+      <p class="small" style="color:#CBD5E1;margin:16px 0 0">Prefere falar com alguém? <a href="${wa('Olá! Quero conhecer o Opex Fideliza' + (segKey ? ' para ' + p.label.toLowerCase() : '') + '.')}" target="_blank" rel="noopener" style="color:var(--gold)">Chame no WhatsApp</a>.</p>
     </div>
     <div>
       <form class="box" id="pedido" novalidate>
@@ -397,7 +397,7 @@ ${segKey ? '' : `<section id="para-quem"><div class="wrap">
   <div class="kicker">Dúvidas</div>
   <h2>Perguntas frequentes</h2>
   <div class="faq" style="max-width:840px">
-    <details><summary>Preciso trocar de número ou de sistema?</summary><p>Não. O Opex Care é uma extensão do Chrome que abre dentro do WhatsApp Web, com o número que você já usa. A agenda continua sendo a sua Google Agenda.</p></details>
+    <details><summary>Preciso trocar de número ou de sistema?</summary><p>Não. O Opex Fideliza é uma extensão do Chrome que abre dentro do WhatsApp Web, com o número que você já usa. A agenda continua sendo a sua Google Agenda.</p></details>
     <details><summary>As mensagens saem com o computador desligado?</summary><p>Não. Os envios saem pelo seu WhatsApp Web, então o Chrome precisa estar aberto com o WhatsApp conectado. Se estiver fechado na hora, a mensagem sai assim que você abrir, e o Chrome avisa que há envios aguardando.</p></details>
     <details><summary>Meu número pode ser bloqueado?</summary><p>O envio usa intervalos aleatórios, pausas, limite diário e variações de texto, que reduzem o risco. Nenhuma ferramenta garante que o WhatsApp não bloqueie. Envie mensagens de serviço para quem é seu cliente e respeite quem pede para não receber.</p></details>
     <details><summary>Onde ficam os dados dos meus clientes?</summary><p>No seu navegador, com backup automático na sua conta do Google Drive, se você ativar. O servidor da OPEX guarda apenas os dados da sua licença: nome, contato e plano.</p></details>
@@ -410,28 +410,28 @@ ${segKey ? '' : `<section id="para-quem"><div class="wrap">
 <section class="cta"><div class="wrap">
   <h2>Veja funcionando no seu WhatsApp ainda hoje</h2>
   <p>Três dias com todos os recursos, sem cartão. Se não fizer diferença no seu dia, é só não continuar.</p>
-  <div class="ctas" style="justify-content:center"><a class="btn gold" href="#comecar" data-plan="Teste">Começar teste grátis</a><a class="btn light" href="${wa('Olá! Quero tirar uma dúvida sobre o Opex Care.')}" target="_blank" rel="noopener">Tirar dúvida no WhatsApp</a></div>
+  <div class="ctas" style="justify-content:center"><a class="btn gold" href="#comecar" data-plan="Teste">Começar teste grátis</a><a class="btn light" href="${wa('Olá! Quero tirar uma dúvida sobre o Opex Fideliza.')}" target="_blank" rel="noopener">Tirar dúvida no WhatsApp</a></div>
 </div></section>
 ${footer(root)}
-<div class="mbar"><a class="btn gold" href="#comecar" data-plan="Teste">Testar grátis</a><a class="btn light" href="${wa('Olá! Quero conhecer o Opex Care.')}" target="_blank" rel="noopener">WhatsApp</a></div>
+<div class="mbar"><a class="btn gold" href="#comecar" data-plan="Teste">Testar grátis</a><a class="btn light" href="${wa('Olá! Quero conhecer o Opex Fideliza.')}" target="_blank" rel="noopener">WhatsApp</a></div>
 ${orderScript}
 </body></html>`;
 }
 
 const doc = (title, desc, root, body) => `${head({ title, desc }, root)}${topbar(root, false)}<section><div class="wrap doc">${body}</div></section>${footer(root)}</body></html>`;
 
-const instalar = doc('Como instalar o Opex Care no Chrome', 'Passo a passo para instalar a extensão Opex Care e entrar no painel pelo WhatsApp Web.', '', `
+const instalar = doc('Como instalar o Opex Fideliza no Chrome', 'Passo a passo para instalar a extensão Opex Fideliza e entrar no painel pelo WhatsApp Web.', '', `
 <div class="kicker">Instalação</div>
-<h1>Como instalar o Opex Care</h1>
+<h1>Como instalar o Opex Fideliza</h1>
 <p>Leva cerca de 2 minutos. Você precisa de um computador com o Google Chrome e o WhatsApp Web.</p>
 <p><a class="btn gold" href="${DOWNLOAD}">Baixar a extensão (arquivo .zip)</a></p>
 <h2>Passo a passo</h2>
 <ol>
-  <li><b>Descompacte o arquivo</b> em uma pasta que você não vá apagar, por exemplo <i>Documentos › Opex Care</i>.</li>
+  <li><b>Descompacte o arquivo</b> em uma pasta que você não vá apagar, por exemplo <i>Documentos › Opex Fideliza</i>.</li>
   <li>No Chrome, digite na barra de endereço: <div class="shot">chrome://extensions</div></li>
   <li>Ligue a chave <b>Modo do desenvolvedor</b>, no canto superior direito.</li>
   <li>Clique em <b>Carregar sem compactação</b> e escolha a pasta que você descompactou.</li>
-  <li>Abra o <a href="https://web.whatsapp.com" target="_blank" rel="noopener">WhatsApp Web</a>. O painel do Opex Care aparece no lado direito.</li>
+  <li>Abra o <a href="https://web.whatsapp.com" target="_blank" rel="noopener">WhatsApp Web</a>. O painel do Opex Fideliza aparece no lado direito.</li>
   <li>Entre com o <b>e-mail ou WhatsApp</b> e a <b>senha</b> que você criou no cadastro.</li>
 </ol>
 <h2>Primeiros ajustes</h2>
@@ -443,15 +443,15 @@ const instalar = doc('Como instalar o Opex Care no Chrome', 'Passo a passo para 
 </ol>
 <div class="warn"><b>Importante:</b> não apague nem mova a pasta depois de instalar, senão o Chrome desativa a extensão. Se o Chrome mostrar um aviso sobre extensões em modo de desenvolvedor ao abrir, é só fechar o aviso.</div>
 <h2>Precisa de ajuda?</h2>
-<p><a class="btn primary" href="${wa('Olá! Preciso de ajuda para instalar o Opex Care.')}" target="_blank" rel="noopener">Falar com o suporte no WhatsApp</a></p>`);
+<p><a class="btn primary" href="${wa('Olá! Preciso de ajuda para instalar o Opex Fideliza.')}" target="_blank" rel="noopener">Falar com o suporte no WhatsApp</a></p>`);
 
-const privacidade = doc('Política de privacidade — Opex Care', 'Como o Opex Care trata os dados da empresa contratante e dos clientes dela.', '', `
-<div class="kicker">Opex Care</div>
+const privacidade = doc('Política de privacidade — Opex Fideliza', 'Como o Opex Fideliza trata os dados da empresa contratante e dos clientes dela.', '', `
+<div class="kicker">Opex Fideliza</div>
 <h1>Política de privacidade</h1>
 <p class="small">Última atualização: 9 de novembro de 2026.</p>
-<p>Esta política explica quais dados o Opex Care usa, onde eles ficam e para quê. O Opex Care é uma extensão do Google Chrome que funciona dentro do WhatsApp Web, oferecida pela OPEX Business Growth, de Aracaju/SE.</p>
+<p>Esta política explica quais dados o Opex Fideliza usa, onde eles ficam e para quê. O Opex Fideliza é uma extensão do Google Chrome que funciona dentro do WhatsApp Web, oferecida pela OPEX Business Growth, de Aracaju/SE.</p>
 <h2>1. Quem é responsável pelos dados</h2>
-<p>A empresa que contrata o Opex Care (clínica, salão, corretora, loja) é a controladora dos dados dos seus próprios clientes. A OPEX atua como operadora apenas dos dados de licença descritos no item 3.</p>
+<p>A empresa que contrata o Opex Fideliza (clínica, salão, corretora, loja) é a controladora dos dados dos seus próprios clientes. A OPEX atua como operadora apenas dos dados de licença descritos no item 3.</p>
 <h2>2. Dados que ficam no seu navegador</h2>
 <p>A extensão guarda no armazenamento local do seu Chrome, no seu computador:</p>
 <ul>
@@ -472,7 +472,7 @@ const privacidade = doc('Política de privacidade — Opex Care', 'Como o Opex C
 </ul>
 <p>Esses dados são usados somente para essas funções, dentro do seu navegador. Não são transferidos à OPEX nem a terceiros, não são usados para publicidade e não são lidos por pessoas. O uso de informações recebidas das APIs do Google segue a <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Política de Dados do Usuário dos Serviços de API do Google</a>, incluindo os requisitos de Uso Limitado.</p>
 <h2>5. WhatsApp</h2>
-<p>As mensagens são enviadas pelo seu próprio WhatsApp Web, com o seu número. A OPEX não tem acesso às suas conversas. O Opex Care não é afiliado, patrocinado nem endossado pelo WhatsApp ou pela Meta.</p>
+<p>As mensagens são enviadas pelo seu próprio WhatsApp Web, com o seu número. A OPEX não tem acesso às suas conversas. O Opex Fideliza não é afiliado, patrocinado nem endossado pelo WhatsApp ou pela Meta.</p>
 <h2>6. Compartilhamento</h2>
 <p>Não vendemos nem compartilhamos dados para marketing. Os dados de licença ficam em provedor de hospedagem contratado pela OPEX (Netlify).</p>
 <h2>7. Direitos dos titulares</h2>
@@ -480,20 +480,20 @@ const privacidade = doc('Política de privacidade — Opex Care', 'Como o Opex C
 <h2>8. Guarda e exclusão</h2>
 <p>Os dados locais ficam no seu navegador até você removê-los ou desinstalar a extensão. O backup fica na sua conta do Google Drive, sob o seu controle. Os dados de licença são mantidos enquanto a licença existir e apagados a pedido.</p>
 <h2>9. Contato</h2>
-<p>Dúvidas e pedidos: WhatsApp <a href="${wa('Olá! Tenho uma dúvida sobre privacidade no Opex Care.')}" target="_blank" rel="noopener">(79) 98169-7274</a>.</p>`);
+<p>Dúvidas e pedidos: WhatsApp <a href="${wa('Olá! Tenho uma dúvida sobre privacidade no Opex Fideliza.')}" target="_blank" rel="noopener">(79) 98169-7274</a>.</p>`);
 
-const termos = doc('Termos de uso — Opex Care', 'Condições de uso da extensão Opex Care.', '', `
-<div class="kicker">Opex Care</div>
+const termos = doc('Termos de uso — Opex Fideliza', 'Condições de uso da extensão Opex Fideliza.', '', `
+<div class="kicker">Opex Fideliza</div>
 <h1>Termos de uso</h1>
 <p class="small">Última atualização: 9 de novembro de 2026.</p>
 <h2>1. O serviço</h2>
-<p>O Opex Care é uma extensão do Google Chrome que acrescenta ao WhatsApp Web um painel de relacionamento: funil, etiquetas, histórico, lembretes pela Google Agenda, pós-atendimento programado e mensagens de aniversário. É oferecido pela OPEX Business Growth.</p>
+<p>O Opex Fideliza é uma extensão do Google Chrome que acrescenta ao WhatsApp Web um painel de relacionamento: funil, etiquetas, histórico, lembretes pela Google Agenda, pós-atendimento programado e mensagens de aniversário. É oferecido pela OPEX Business Growth.</p>
 <h2>2. Licença, teste e planos</h2>
 <p>O teste grátis dura 3 dias e é limitado a um por empresa. Os planos são mensal (R$ 40), semestral (R$ 200) e anual (R$ 300), pagos antecipadamente. Cada licença vale para um computador, salvo combinação diferente. Ao fim do prazo sem renovação, o painel fica bloqueado; os dados locais permanecem no seu navegador.</p>
 <h2>3. Uso responsável</h2>
-<p>Você se compromete a enviar mensagens apenas a pessoas com quem tem relação de atendimento ou que autorizaram o contato, a respeitar pedidos para não receber mensagens e a cumprir a LGPD e os termos do WhatsApp. É proibido usar o Opex Care para spam, golpes ou conteúdo ilegal. O descumprimento pode levar ao bloqueio da licença.</p>
+<p>Você se compromete a enviar mensagens apenas a pessoas com quem tem relação de atendimento ou que autorizaram o contato, a respeitar pedidos para não receber mensagens e a cumprir a LGPD e os termos do WhatsApp. É proibido usar o Opex Fideliza para spam, golpes ou conteúdo ilegal. O descumprimento pode levar ao bloqueio da licença.</p>
 <h2>4. WhatsApp e Google</h2>
-<p>O Opex Care depende do WhatsApp Web e de serviços do Google, que pertencem a terceiros e podem mudar sem aviso. O Opex Care não é afiliado ao WhatsApp, à Meta nem ao Google. Não garantimos que o WhatsApp não restrinja ou bloqueie o seu número; o ritmo seguro de envio reduz o risco, mas não o elimina.</p>
+<p>O Opex Fideliza depende do WhatsApp Web e de serviços do Google, que pertencem a terceiros e podem mudar sem aviso. O Opex Fideliza não é afiliado ao WhatsApp, à Meta nem ao Google. Não garantimos que o WhatsApp não restrinja ou bloqueie o seu número; o ritmo seguro de envio reduz o risco, mas não o elimina.</p>
 <h2>5. Seus dados</h2>
 <p>Os dados dos seus clientes ficam no seu navegador e, se você ativar, no seu Google Drive. Você é responsável por manter o backup ativo. Veja a <a href="privacidade.html">política de privacidade</a>.</p>
 <h2>6. Disponibilidade e responsabilidade</h2>
@@ -503,7 +503,7 @@ const termos = doc('Termos de uso — Opex Care', 'Condições de uso da extens�
 <h2>8. Mudanças</h2>
 <p>Estes termos podem ser atualizados. Mudanças relevantes são avisadas pelo painel ou pelo WhatsApp cadastrado.</p>
 <h2>9. Contato e foro</h2>
-<p>Contato: WhatsApp <a href="${wa('Olá! Tenho uma dúvida sobre os termos do Opex Care.')}" target="_blank" rel="noopener">(79) 98169-7274</a>. Fica eleito o foro de Aracaju/SE.</p>`);
+<p>Contato: WhatsApp <a href="${wa('Olá! Tenho uma dúvida sobre os termos do Opex Fideliza.')}" target="_blank" rel="noopener">(79) 98169-7274</a>. Fica eleito o foro de Aracaju/SE.</p>`);
 
 fs.writeFileSync(path.join(out, 'index.html'), page(GENERIC, '', ''));
 for (const [k, s] of Object.entries(SEGS)) fs.writeFileSync(path.join(out, 'segmentos', s.file + '.html'), page(s, '../', k));

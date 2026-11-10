@@ -42,7 +42,7 @@ $('import').addEventListener('change', async (e) => {
   try {
     const parsed = JSON.parse(await f.text());
     const data = parsed && parsed.app === 'opex-agent' ? parsed.data : parsed;
-    if (!data || typeof data !== 'object' || !data.contacts) throw new Error('Arquivo não é um backup do Opex Care');
+    if (!data || typeof data !== 'object' || !data.contacts) throw new Error('Arquivo não é um backup do Opex Fideliza');
     if (!confirm('Substituir todos os dados atuais por este backup?')) return;
     await chrome.storage.local.set({ [KEY]: data });
     await load();

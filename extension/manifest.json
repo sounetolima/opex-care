@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Opex Care — CRM para WhatsApp Web",
-  "short_name": "Opex Care",
-  "version": "2.5.0",
+  "name": "Opex Fideliza — CRM para WhatsApp Web",
+  "short_name": "Opex Fideliza",
+  "version": "2.6.0",
   "description": "CRM leve para WhatsApp Web: lembretes da agenda, pós-atendimento automático, aniversariantes, funil e histórico de cada cliente.",
   "minimum_chrome_version": "111",
   "permissions": [
@@ -63,7 +63,7 @@
     }
   ],
   "action": {
-    "default_title": "Opex Care",
+    "default_title": "Opex Fideliza",
     "default_popup": "src/popup.html",
     "default_icon": {
       "16": "icons/icon16.png",

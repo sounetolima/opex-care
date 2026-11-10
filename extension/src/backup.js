@@ -1,4 +1,4 @@
-// Opex Care — backup automático no Google Drive do próprio cliente (permissão drive.file: só arquivos criados pela extensão).
+// Opex Fideliza — backup automático no Google Drive do próprio cliente (permissão drive.file: só arquivos criados pela extensão).
 /* global chrome, OA */
 (() => {
   'use strict';

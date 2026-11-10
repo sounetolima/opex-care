@@ -1,4 +1,4 @@
-// Opex Care — armazenamento local (chrome.storage.local). Nada sai do computador.
+// Opex Fideliza — armazenamento local (chrome.storage.local). Nada sai do computador.
 /* global chrome, OA */
 (() => {
   'use strict';
@@ -65,6 +65,9 @@
       calendars: [],          // uma agenda do Google por unidade: { id, name }
       lastSyncAt: 0,
       services: [],           // serviços: { name, price, minutes } — escolhidos na agenda e citados nos lembretes
+      idleWarnMin: 7,         // aviso ao cliente sem resposta (minutos desde a última mensagem do atendente)
+      idleCloseMin: 10,       // encerramento automático sem resposta do cliente
+      idleWarnMsg: '{primeiro_nome}, seu atendimento poderá ser encerrado automaticamente em {minutos_restantes} minutos por inatividade. Se precisar de algo, é só responder.',
       shiftCutoffHour: 12,    // início a partir deste horário = turno vespertino/noturno (recebe lembrete 6 h antes)
       confirmOnBooking: true, // ao marcar pelo painel, envia a confirmação com os dados
       confirmMsg: '{saudacao}, {primeiro_nome}! Seu horário está marcado: {servico} em {data} às {hora}, na {unidade}. Qualquer imprevisto, é só avisar por aqui. 😊',
@@ -113,7 +116,7 @@
       clearTimeout(saveTimer);
       const write = () => {
         lastWrite = Date.now();
-        return chrome.storage.local.set({ [KEY]: state }).catch((e) => console.error('[Opex Care] save', e));
+        return chrome.storage.local.set({ [KEY]: state }).catch((e) => console.error('[Opex Fideliza] save', e));
       };
       if (immediate) return write();
       saveTimer = setTimeout(write, 250);
@@ -191,7 +194,7 @@
     startAttendance(id, attId) {
       const c = S.upsertContact(id);
       if (c.attendance && c.attendance.status === 'open') return false;
-      c.attendance = { status: 'open', attId, startedAt: Date.now() };
+      c.attendance = { status: 'open', attId, startedAt: Date.now(), lastOutAt: Date.now(), warnedAt: 0 };
       S.addNote(id, 'Atendimento iniciado por ' + S.attName(attId), 'auto');
       return true;
     },

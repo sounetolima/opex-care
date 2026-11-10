@@ -1,4 +1,4 @@
-// Opex Care — utilitários e cliente da ponte com o WhatsApp.
+// Opex Fideliza — utilitários e cliente da ponte com o WhatsApp.
 /* global chrome */
 var OA = (globalThis.OA = globalThis.OA || {});
 
@@ -21,7 +21,7 @@ var OA = (globalThis.OA = globalThis.OA || {});
       m.ok ? p.resolve(m.result) : p.reject(new Error(m.error || 'Falha'));
     } else if (m.type === 'event') {
       (listeners.get(m.event) || []).forEach((fn) => {
-        try { fn(m.data); } catch (err) { console.error('[Opex Care]', err); }
+        try { fn(m.data); } catch (err) { console.error('[Opex Fideliza]', err); }
       });
     }
   });

@@ -1,4 +1,4 @@
-// Opex Care — agenda do Google (somente leitura): lê as próximas 48 h de cada unidade e programa lembretes.
+// Opex Fideliza — agenda do Google (somente leitura): lê as próximas 48 h de cada unidade e programa lembretes.
 // O token fica no service worker; esta página só pede o token e faz as leituras.
 /* global chrome, OA */
 (() => {

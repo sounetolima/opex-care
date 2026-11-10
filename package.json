@@ -2,7 +2,7 @@
   "name": "opex-care-licencas",
   "version": "1.0.0",
   "private": true,
-  "description": "Licenças do Opex Care: painel do administrador, verificação e marca (nome e logo) por cliente.",
+  "description": "Licenças do Opex Fideliza: painel do administrador, verificação e marca (nome e logo) por cliente.",
   "scripts": { "test": "node --test test/licenses.test.js" },
   "engines": { "node": ">=18" },
   "dependencies": { "@netlify/blobs": "^8.0.0" }

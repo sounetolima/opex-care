@@ -1,4 +1,4 @@
-// Opex Care — service worker: relógio dos agendamentos e notificações.
+// Opex Fideliza — service worker: relógio dos agendamentos e notificações.
 /* global chrome */
 
 const KEY = 'opex_care_v1';
@@ -35,14 +35,14 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   if (data.notifiedAt && now - data.notifiedAt < 60 * 60e3) return;
   data.notifiedAt = now;
   await chrome.storage.local.set({ [KEY]: data });
-  notify('Opex Care: envios aguardando', `${dueFu} retorno(s) e ${pendingQ} mensagem(ns) na fila. Abra o WhatsApp Web para enviar.`, 'open-wa');
+  notify('Opex Fideliza: envios aguardando', `${dueFu} retorno(s) e ${pendingQ} mensagem(ns) na fila. Abra o WhatsApp Web para enviar.`, 'open-wa');
 });
 
 function notify(title, message, id) {
   chrome.notifications.create(id ? id + ':' + Date.now() : '', {
     type: 'basic',
     iconUrl: chrome.runtime.getURL('icons/icon128.png'),
-    title: String(title || 'Opex Care').slice(0, 120),
+    title: String(title || 'Opex Fideliza').slice(0, 120),
     message: String(message || '').slice(0, 300),
     priority: 1,
   });

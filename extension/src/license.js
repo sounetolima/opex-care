@@ -1,4 +1,4 @@
-// Opex Care — licença por cliente. Verificação feita no servidor da OPEX (via service worker).
+// Opex Fideliza — licença por cliente. Verificação feita no servidor da OPEX (via service worker).
 /* global chrome, OA */
 (() => {
   'use strict';

@@ -1,4 +1,4 @@
-// Licenças do Opex Care: painel do administrador e verificação feita pela extensão.
+// Licenças do Opex Fideliza: painel do administrador e verificação feita pela extensão.
 // As rotas de admin usam token assinado; as da extensão são públicas e respondem no formato que a extensão espera.
 const crypto = require('node:crypto');
 const { hashPassword, verifyPassword, signToken, verifyToken } = require('./auth');

@@ -1,4 +1,4 @@
-// Opex Care — perfis por segmento: etapas do funil, etiquetas e textos de lembrete.
+// Opex Fideliza — perfis por segmento: etapas do funil, etiquetas e textos de lembrete.
 // Mesma extensão para todos; o perfil só muda o ponto de partida. Não apaga clientes nem históricos.
 /* global OA */
 (() => {

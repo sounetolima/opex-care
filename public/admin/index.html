@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Opex Care — Gestão de licenças</title>
+<title>Opex Fideliza — Gestão de licenças</title>
 <link rel="icon" href="/img/logo.png">
 <style>
 :root{--navy0:#04070E;--navy:#060C1A;--navy2:#0B1630;--navy3:#12204A;--blue:#3D63DD;--gold:#D4AA46;--text:#F8FAFC;--muted:#94A3B8;--line:rgba(255,255,255,.09);--ok:#22C55E;--warn:#F59E0B;--bad:#EF4444}
@@ -48,8 +48,8 @@ const first=l=>(l.name||'').trim().split(/\s+/)[0]||'';
 const noticed=k=>localStorage.getItem('care_notice_'+k)===new Date().toDateString();
 function renewMsg(l,now){const d=l.expiresAt?Math.ceil((l.expiresAt-now)/864e5):null;const quando=d===null?'':d<0?'venceu em '+fmtD(l.expiresAt):d===0?'vence hoje':'vence em '+d+' dia(s), em '+fmtD(l.expiresAt);
   return l.plan==='Teste'
-   ?`Olá ${first(l)}! Seu teste grátis do Opex Care ${quando}. Gostou? Para continuar sem perder seus clientes e lembretes, escolha um plano: mensal R$ 40, semestral R$ 200 ou anual R$ 300. Posso liberar agora para você?`
-   :`Olá ${first(l)}! Sua licença do Opex Care (${l.plan}) ${quando}. Para seguir com os lembretes e retornos automáticos sem interrupção, posso renovar agora para você?`}
+   ?`Olá ${first(l)}! Seu teste grátis do Opex Fideliza ${quando}. Gostou? Para continuar sem perder seus clientes e lembretes, escolha um plano: mensal R$ 40, semestral R$ 200 ou anual R$ 300. Posso liberar agora para você?`
+   :`Olá ${first(l)}! Sua licença do Opex Fideliza (${l.plan}) ${quando}. Para seguir com os lembretes e retornos automáticos sem interrupção, posso renovar agora para você?`}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
 async function api(path,body){
   const r=await fetch('/api/admin/'+path,{method:body?'POST':'GET',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:body?JSON.stringify(body):undefined});
@@ -60,7 +60,7 @@ function logout(){token='';sessionStorage.removeItem('opex_admin');clearInterval
 function loginView(msg=''){
   const rt=new URLSearchParams(location.search).get('reset');
   if(rt)return resetView(rt);
-  $('#app').innerHTML=`<div class="login card"><header style="margin-bottom:14px"><img src="/img/logo.png"><div><b>OPEX CARE</b><small>Gestão de licenças</small></div></header>
+  $('#app').innerHTML=`<div class="login card"><header style="margin-bottom:14px"><img src="/img/logo.png"><div><b>OPEX FIDELIZA</b><small>Gestão de licenças</small></div></header>
   <p>Acesso restrito à equipe OPEX.</p><form id="lf"><div class="f"><label>Senha do painel</label><input type="password" id="pw" autofocus autocomplete="current-password"></div>
   <button class="btn gold" style="width:100%">Entrar</button><div class="err" id="le">${esc(msg)}</div></form>
   <p style="margin:10px 0 0;text-align:center"><a href="#" id="fg" style="color:var(--gold)">Esqueci a senha</a></p></div>`;
@@ -76,7 +76,7 @@ const fmtD=t=>t?new Date(t).toLocaleDateString('pt-BR'):'—';
 function ago(t,now){if(!t)return 'nunca';const m=Math.floor((now-t)/6e4);if(m<2)return 'agora';if(m<60)return m+' min';const h=Math.floor(m/60);if(h<24)return h+' h';return Math.floor(h/24)+' d'}
 function dleft(l,now){if(!l.expiresAt)return 'sem vencimento';const d=Math.ceil((l.expiresAt-now)/864e5);return d<0?'venceu há '+(-d)+' d':d===0?'vence hoje':'vence em '+d+' d'}
 async function load(){try{data=await api('licenses');render()}catch(e){if(token)toast(e.message)}}
-function start(){$('#app').innerHTML=`<div class="wrap"><header><img src="/img/logo.png"><div><b>OPEX CARE</b><small>Gestão de licenças e usuários</small></div><span class="sp"></span>
+function start(){$('#app').innerHTML=`<div class="wrap"><header><img src="/img/logo.png"><div><b>OPEX FIDELIZA</b><small>Gestão de licenças e usuários</small></div><span class="sp"></span>
 <button class="btn" id="dlk">🔗 Link de download</button><button class="btn" id="rf">↻ Atualizar</button><button class="btn" id="cp">🔑 Alterar senha</button><button class="btn" id="lo">Sair</button></header><div id="main"><div class="empty">Carregando…</div></div></div>`;
   $('#dlk').onclick=async()=>{const u=prompt('Link de download da extensão (https://…). Aparece para quem faz o teste grátis e nas mensagens de liberação:',(data&&data.settings&&data.settings.downloadUrl)||'');if(u===null)return;try{await api('settings',{downloadUrl:u});toast('Link salvo');load()}catch(x){toast(x.message)}};$('#rf').onclick=load;$('#cp').onclick=async()=>{const c=prompt('Senha atual:');if(!c)return;const n=prompt('Nova senha (mínimo 8 caracteres):');if(!n)return;try{const j=await api('change-password',{current:c,password:n});token=j.token;sessionStorage.setItem('opex_admin',token);toast('Senha alterada')}catch(x){toast(x.message)}};$('#lo').onclick=logout;load();clearInterval(timer);timer=setInterval(load,60000)}
 function wa(l,t){return 'https://wa.me/'+String(l.phone||'').replace(/\D/g,'').replace(/^(?!55)/,'55')+'?text='+encodeURIComponent(t)}
@@ -89,12 +89,12 @@ function ordersCard(items,now){
   <td>${esc(o.label)}${o.amount?` · R$ ${o.amount}`:''}<div class="sub">${new Date(o.createdAt).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})}</div></td>
   <td><span class="pill ${p[0]}">${p[1]}</span></td>
   <td><div class="acts" data-k="${l.key}"><button class="btn sm gold" data-a="approve">✔ Aprovar</button><button class="btn sm danger" data-a="reject">Recusar</button>
-  <a class="btn sm" target="_blank" rel="noopener" href="${wa(l,'Olá '+(l.name||'').split(' ')[0]+'! Recebi seu pedido do Opex Care.')}">💬 WhatsApp</a></div></td></tr>`};
+  <a class="btn sm" target="_blank" rel="noopener" href="${wa(l,'Olá '+(l.name||'').split(' ')[0]+'! Recebi seu pedido do Opex Fideliza.')}">💬 WhatsApp</a></div></td></tr>`};
   return `<div class="card" style="margin-bottom:16px"><h3 style="margin:0 0 10px">📥 Pedidos <span class="sub">${pend.length} aguardando</span></h3><div class="tw"><table><thead><tr><th>Cliente</th><th>Plano</th><th>Status</th><th>Ações</th></tr></thead><tbody>
   ${[...pend,...rest].map(row).join('')}</tbody></table></div></div>`}
 function showApproved(l){
   const d=$('#dlg');const dl=(data&&data.settings&&data.settings.downloadUrl)||localStorage.getItem('opex_dl')||DL_DEFAULT;
-  const msg=()=>`Olá ${(l.name||'').split(' ')[0]}! Seu acesso ao Opex Care foi liberado ✅\n\nLogin: ${l.email||l.phone} (e a senha que você cadastrou no pedido)\n${$('#dlu').value?'Baixe a extensão: '+$('#dlu').value+'\n':''}\nPasso a passo da instalação: ${SITE}/instalar.html`;
+  const msg=()=>`Olá ${(l.name||'').split(' ')[0]}! Seu acesso ao Opex Fideliza foi liberado ✅\n\nLogin: ${l.email||l.phone} (e a senha que você cadastrou no pedido)\n${$('#dlu').value?'Baixe a extensão: '+$('#dlu').value+'\n':''}\nPasso a passo da instalação: ${SITE}/instalar.html`;
   d.innerHTML=`<h3 style="margin:0 0 6px">Acesso liberado ✅</h3><p class="sub">Envie o aviso ao cliente pelo WhatsApp.</p><div class="f"><label>Link de download da extensão (Drive) — fica salvo</label><input id="dlu" value="${esc(dl)}" placeholder="https://drive.google.com/…"></div>
   <pre id="dlm" style="white-space:pre-wrap;background:rgba(0,0,0,.4);padding:12px;border-radius:10px;font-size:13px"></pre><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" id="dcp">Copiar</button><a class="btn gold" id="dwa" target="_blank" rel="noopener">Abrir WhatsApp</a><button class="btn" id="dcx">Fechar</button></div>`;
   const upd=()=>{localStorage.setItem('opex_dl',$('#dlu').value);$('#dlm').textContent=msg();$('#dwa').href=wa(l,msg())};
@@ -142,7 +142,7 @@ function render(){
 function showCred(l,pw){
   const d=$('#dlg'),login=l.email||l.phone||'(cadastre e-mail ou telefone)';
   const dl=(data&&data.settings&&data.settings.downloadUrl)||DL_DEFAULT;
-  const txt=`Olá, ${first(l)}! Seu acesso ao Opex Care está liberado ✅\n\nLogin (e-mail ou telefone): ${login}\nSenha: ${pw}\n(Ou use a chave: ${l.key})\n\nBaixe a extensão: ${dl}\nPasso a passo: ${SITE}/instalar.html`;
+  const txt=`Olá, ${first(l)}! Seu acesso ao Opex Fideliza está liberado ✅\n\nLogin (e-mail ou telefone): ${login}\nSenha: ${pw}\n(Ou use a chave: ${l.key})\n\nBaixe a extensão: ${dl}\nPasso a passo: ${SITE}/instalar.html`;
   d.innerHTML=`<h3 style="margin:0 0 10px">Acesso do cliente</h3><p class="sub">Esta senha aparece só agora. Copie e envie ao cliente.</p><pre style="white-space:pre-wrap;background:rgba(0,0,0,.4);padding:12px;border-radius:10px;font-size:13px">${esc(txt)}</pre><div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" id="cc">Copiar</button>${l.phone?`<a class="btn" target="_blank" rel="noopener" href="${wa(l,txt)}">Enviar no WhatsApp</a>`:''}<button class="btn gold" id="cx">Fechar</button></div>`;
   d.showModal();$('#cc').onclick=()=>{navigator.clipboard.writeText(txt);toast('Copiado')};$('#cx').onclick=()=>d.close()}
 function form(l){let brandLogo=(l&&l.brand&&l.brand.logo)||'';
