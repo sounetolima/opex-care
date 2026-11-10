@@ -317,7 +317,7 @@ ${topbar(root)}
     <div class="card"><div class="ico">🛡️</div><h3>Envio com ritmo seguro</h3><p>Intervalos aleatórios, pausas, limite diário e variações de texto. Pensado para proteger o seu número.</p></div>
     <div class="card"><div class="ico">🎯</div><h3>Pronto para o seu ramo</h3><p>Escolha o segmento e o funil, as etiquetas e os textos já vêm ajustados. Você muda o que quiser depois.</p></div>
     <div class="card"><div class="ico">🏷️</div><h3>Com a sua marca</h3><p>O painel abre com o nome e o logo da sua empresa. Sua equipe trabalha na ferramenta da casa.</p></div>
-    <div class="card"><div class="ico">💰</div><h3>Preço fixo e baixo</h3><p>A partir de R$ 25 por mês no plano anual. Sem taxa por mensagem e sem cobrança por contato.</p></div>
+    <div class="card"><div class="ico">💰</div><h3>Preço fixo e baixo</h3><p>A partir de R$ 29 por mês no plano anual. Sem taxa por mensagem e sem cobrança por contato.</p></div>
   </div>
 </div></section>
 
@@ -359,7 +359,7 @@ ${segKey ? '' : `<section id="para-quem"><div class="wrap">
       <ul><li>Todos os recursos</li><li>Suporte pelo WhatsApp</li><li>Sem fidelidade</li></ul><a class="btn ghost" href="#comecar" data-plan="Mensal">Quero o mensal</a></div>
     <div class="plan"><div class="name">Semestral</div><div class="price">R$ 200 <small>/ 6 meses</small></div><div class="per">Sai a R$ 33,33 por mês · economize R$ 40</div>
       <ul><li>Todos os recursos</li><li>Suporte pelo WhatsApp</li><li>Preço garantido por 6 meses</li></ul><a class="btn ghost" href="#comecar" data-plan="Semestral">Quero o semestral</a></div>
-    <div class="plan hl"><span class="badge">MELHOR PREÇO</span><div class="name">Anual</div><div class="price">R$ 300 <small>/ ano</small></div><div class="per">Sai a R$ 25 por mês · economize R$ 180</div>
+    <div class="plan hl"><span class="badge">MELHOR PREÇO</span><div class="name">Anual</div><div class="price">R$ 350 <small>/ ano</small></div><div class="per">Sai a R$ 29 por mês · economize R$ 180</div>
       <ul><li>Todos os recursos</li><li>Suporte pelo WhatsApp</li><li>Preço garantido por 12 meses</li></ul><a class="btn primary" href="#comecar" data-plan="Anual">Quero o anual</a></div>
   </div>
 
@@ -380,7 +380,7 @@ ${segKey ? '' : `<section id="para-quem"><div class="wrap">
         </div>
         <div class="two">
           <div><label class="f" for="p-seg">Seu ramo</label><select class="in" id="p-seg" name="segment">${segOptions(segKey)}</select></div>
-          <div><label class="f" for="p-plan">Plano</label><select class="in" id="p-plan" name="plan"><option value="Teste">Teste grátis · 3 dias</option><option value="Mensal">Mensal · R$ 40</option><option value="Semestral">Semestral · R$ 200</option><option value="Anual">Anual · R$ 300</option></select></div>
+          <div><label class="f" for="p-plan">Plano</label><select class="in" id="p-plan" name="plan"><option value="Teste">Teste grátis · 3 dias</option><option value="Mensal">Mensal · R$ 40</option><option value="Semestral">Semestral · R$ 200</option><option value="Anual">Anual · R$ 350</option></select></div>
         </div>
         <label class="f" for="p-pass">Crie uma senha (mínimo 8 caracteres)</label><input class="in" id="p-pass" name="password" type="password" minlength="8" required autocomplete="new-password">
         <div class="hp" aria-hidden="true"><label>Não preencha<input name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -489,7 +489,7 @@ const termos = doc('Termos de uso — Opex Fideliza', 'Condições de uso da ext
 <h2>1. O serviço</h2>
 <p>O Opex Fideliza é uma extensão do Google Chrome que acrescenta ao WhatsApp Web um painel de relacionamento: funil, etiquetas, histórico, lembretes pela Google Agenda, pós-atendimento programado e mensagens de aniversário. É oferecido pela OPEX Business Growth.</p>
 <h2>2. Licença, teste e planos</h2>
-<p>O teste grátis dura 3 dias e é limitado a um por empresa. Os planos são mensal (R$ 40), semestral (R$ 200) e anual (R$ 300), pagos antecipadamente. Cada licença vale para um computador, salvo combinação diferente. Ao fim do prazo sem renovação, o painel fica bloqueado; os dados locais permanecem no seu navegador.</p>
+<p>O teste grátis dura 3 dias e é limitado a um por empresa. Os planos são mensal (R$ 40), semestral (R$ 200) e anual (R$ 350), pagos antecipadamente. Cada licença vale para um computador, salvo combinação diferente. Ao fim do prazo sem renovação, o painel fica bloqueado; os dados locais permanecem no seu navegador.</p>
 <h2>3. Uso responsável</h2>
 <p>Você se compromete a enviar mensagens apenas a pessoas com quem tem relação de atendimento ou que autorizaram o contato, a respeitar pedidos para não receber mensagens e a cumprir a LGPD e os termos do WhatsApp. É proibido usar o Opex Fideliza para spam, golpes ou conteúdo ilegal. O descumprimento pode levar ao bloqueio da licença.</p>
 <h2>4. WhatsApp e Google</h2>

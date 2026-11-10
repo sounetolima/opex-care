@@ -48,7 +48,7 @@ const first=l=>(l.name||'').trim().split(/\s+/)[0]||'';
 const noticed=k=>localStorage.getItem('care_notice_'+k)===new Date().toDateString();
 function renewMsg(l,now){const d=l.expiresAt?Math.ceil((l.expiresAt-now)/864e5):null;const quando=d===null?'':d<0?'venceu em '+fmtD(l.expiresAt):d===0?'vence hoje':'vence em '+d+' dia(s), em '+fmtD(l.expiresAt);
   return l.plan==='Teste'
-   ?`Olá ${first(l)}! Seu teste grátis do Opex Fideliza ${quando}. Gostou? Para continuar sem perder seus clientes e lembretes, escolha um plano: mensal R$ 40, semestral R$ 200 ou anual R$ 300. Posso liberar agora para você?`
+   ?`Olá ${first(l)}! Seu teste grátis do Opex Fideliza ${quando}. Gostou? Para continuar sem perder seus clientes e lembretes, escolha um plano: mensal R$ 40, semestral R$ 200 ou anual R$ 350. Posso liberar agora para você?`
    :`Olá ${first(l)}! Sua licença do Opex Fideliza (${l.plan}) ${quando}. Para seguir com os lembretes e retornos automáticos sem interrupção, posso renovar agora para você?`}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
 async function api(path,body){

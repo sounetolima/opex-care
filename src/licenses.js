@@ -5,7 +5,7 @@ const { hashPassword, verifyPassword, signToken, verifyToken } = require('./auth
 
 const DAY = 864e5;
 const PLAN_DAYS = { Teste: 3, Mensal: 30, Semestral: 180, Anual: 365, 'Vitalício': null };
-const PLAN_PRICE = { Mensal: 40, Semestral: 200, Anual: 300 };
+const PLAN_PRICE = { Mensal: 40, Semestral: 200, Anual: 350 };
 const ORDER_PLANS = ['Teste', 'Mensal', 'Semestral', 'Anual'];
 const SEEN_EVERY = 3600e3;      // só regrava o "visto por último" de hora em hora
 const LOGIN_TRIES = 8;          // tentativas de senha do painel por IP
