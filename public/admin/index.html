@@ -41,7 +41,7 @@ const $=(s,r=document)=>r.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let token=sessionStorage.getItem('opex_admin')||'',data=null,q='',flt='todos',timer;
 const EXP_DAYS=7;
-const SITE='https://opex-care-site.netlify.app';
+const SITE='https://opex-fideliza-site.netlify.app';
 const DL_DEFAULT=location.origin+'/download/opex-care.zip';
 const first=l=>(l.name||'').trim().split(/\s+/)[0]||'';
 // Aviso de renovação: registra o dia em que foi enviado (neste navegador) para não avisar duas vezes.

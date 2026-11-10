@@ -3,7 +3,7 @@ const { createLicenseService } = require('../../src/licenses');
 const { blobsStore } = require('../../src/store');
 
 // O formulário de pedido fica no site de vendas (outro endereço): só /order aceita chamadas de fora.
-const SITE_ORIGINS = ['https://opex-care-site.netlify.app'];
+const SITE_ORIGINS = ['https://opex-fideliza-site.netlify.app'];
 const json = (status, body, extra) => ({ statusCode: status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...(extra || {}) }, body: JSON.stringify(body) });
 
 let service;

@@ -199,7 +199,7 @@ const head = (p, root) => `<!doctype html>
 <meta property="og:title" content="${p.title}">
 <meta property="og:description" content="${p.desc}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://opex-care-site.netlify.app/img/logo.png">
+<meta property="og:image" content="https://opex-fideliza-site.netlify.app/img/logo.png">
 <link rel="icon" href="${root}img/favicon.png">
 <style>${CSS}</style>
 </head>
